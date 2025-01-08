@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- 4 Wheel Robot with front steering and rear drive -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="delicar_robot">
+  <xacro:arg name="prefix" default="" />
+
+  <xacro:include filename="$(find delicar_bringup)/urdf/delicar_description.urdf.xacro" />
+
+  <!-- Import Rviz colors -->
+  <xacro:include filename="$(find delicar_bringup)/urdf/color.materials.xacro" />
+
+  <!-- Import delicar ros2_control description -->
+  <xacro:include filename="$(find delicar_bringup)/ros2_control/delicar.ros2_control.xacro" />
+
+  <xacro:delicar prefix="$(arg prefix)" />
+
+  <xacro:delicar_ros2_control
+    name="DeliCar" prefix="$(arg prefix)" />
+
+</robot>
