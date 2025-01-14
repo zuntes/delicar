@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+    <xacro:property name="PI" value="3.1415926535897931"/>
+
+    <!-- Arguments -->
+    <xacro:arg name="max_steering_angle" default="0.872665" />
+    <xacro:arg name="max_steering_angular_velocity" default="${PI/4}" />
+    <xacro:arg name="max_steering_effort" default="10.0" />
+    <xacro:arg name="max_velocity" default="5.0" />
+    <xacro:arg name="max_effort" default="100.0" />
+
+    <!-- Vehicle Properties -->
+    <xacro:property name="max_steering_angle" value="$(arg max_steering_angle)"/>
+    <xacro:property name="max_steering_angular_velocity" value="$(arg max_steering_angular_velocity)"/>
+    <xacro:property name="max_steering_effort" value="$(arg max_steering_effort)"/>
+    <xacro:property name="max_velocity" value="$(arg max_velocity)"/>
+    <xacro:property name="max_effort" value="$(arg max_effort)"/>
+
+    <xacro:macro name="gazebo_ros2_control" params="name prefix">
+        
+        <!-- Gazebo Parameters -->
+        <!-- <gazebo reference="${prefix}front_right_wheel_link">
+            <mu1>1.0</mu1>
+            <mu2>1.0</mu2>
+            <kp>100000000.0</kp>
+            <kd>10000.0</kd>
+            <minDepth>0.001</minDepth>
+            <fdir1>1 0 0</fdir1>
+        </gazebo> -->
+
+        <gazebo reference="body_link">
+            <mu1>0.0001</mu1>
+            <mu2>0.0001</mu2>
+        </gazebo>
+
+        <gazebo reference="front_right_wheel_link">
+            <mu1>100.0</mu1>
+            <mu2>100.0</mu2>
+        </gazebo>
+
+        <gazebo reference="front_left_wheel_link">
+            <mu1>100.0</mu1>
+            <mu2>100.0</mu2>
+        </gazebo>
+        
+        <gazebo reference="rear_right_wheel_link">
+            <mu1>100.0</mu1>
+            <mu2>100.0</mu2>
+        </gazebo>
+
+        <gazebo reference="rear_left_wheel_link">
+            <mu1>100.0</mu1>
+            <mu2>100.0</mu2>
+        </gazebo>
+
+        <gazebo reference="${prefix}front_left_steering_link">
+            <mu1>1.0</mu1>
+            <mu2>1.0</mu2>
+        </gazebo>
+
+        <gazebo reference="${prefix}front_right_steering_link">
+            <mu1>1.0</mu1>
+            <mu2>1.0</mu2>
+        </gazebo>
+
+        <!-- Gazebo Control -->
+        <ros2_control name="${name}" type="system">
+            <hardware>
+                <plugin>gazebo_ros2_control/GazeboSystem</plugin>
+            </hardware>
+
+        <joint name="front_left_steering_joint">
+            <command_interface name="position">
+                <param name="min">${-max_steering_angle}</param>
+                <param name="max">${max_steering_angle}</param>
+            </command_interface>
+
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="front_right_steering_joint">
+            <command_interface name="position">
+                <param name="min">${-max_steering_angle}</param>
+                <param name="max">${max_steering_angle}</param>
+            </command_interface>
+
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="rear_left_wheel_joint">
+            <command_interface name="velocity">
+                <param name="min">${-max_velocity}</param>
+                <param name="max">${max_velocity}</param>
+            </command_interface>
+
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        <joint name="rear_right_wheel_joint">
+            <command_interface name="velocity">
+                <param name="min">${-max_velocity}</param>
+                <param name="max">${max_velocity}</param>
+            </command_interface>
+
+            <state_interface name="position"/>
+            <state_interface name="velocity"/>
+        </joint>
+
+        </ros2_control>
+
+        <!-- Gazebo Plugin -->
+        <gazebo>
+            <plugin filename="libgazebo_ros2_control.so" name="gazebo_ros2_control">
+            <robot_param>robot_description</robot_param>
+            <robot_param_node>robot_state_publisher</robot_param_node>
+            <parameters>$(find delicar_bringup)/config/gazebo_controllers.yaml</parameters>
+            <!-- <remapping>bicycle_steering_controller/tf_odometry:=odom</remapping> -->
+            </plugin>
+        </gazebo> 
+    </xacro:macro>
+
+</robot>

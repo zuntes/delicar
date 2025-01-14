@@ -29,17 +29,14 @@ def generate_launch_description():
         DeclareLaunchArgument(
             "gui",
             default_value="true",
-            description="Start Rviz2 and Joint State Publisher gui automatically \
-        with this launch file.",
+            description="Start Rviz2 and Joint State Publisher gui automatically ",
         )
     )
     declared_arguments.append(
         DeclareLaunchArgument(
             "prefix",
             default_value='""',
-            description="Prefix of the joint names, useful for \
-        multi-robot setup. If changed than also joint names in the controllers' configuration \
-        have to be updated.",
+            description="Prefix of the joint names, useful for multi-robot setup. If changed than also joint names in the controllers' configuration have to be updated.",
         )
     )
 

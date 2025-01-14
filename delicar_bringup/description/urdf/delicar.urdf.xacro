@@ -1,19 +1,32 @@
 <?xml version="1.0"?>
 <!-- 4 Wheel Robot with front steering and rear drive -->
 <robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="delicar_robot">
+  
   <xacro:arg name="prefix" default="" />
 
+  <xacro:arg name="use_sim" default="true"/>
+  
   <xacro:include filename="$(find delicar_bringup)/urdf/delicar_description.urdf.xacro" />
 
-  <!-- Import Rviz colors -->
+  <!-- Import colors -->
   <xacro:include filename="$(find delicar_bringup)/urdf/color.materials.xacro" />
 
-  <!-- Import delicar ros2_control description -->
-  <xacro:include filename="$(find delicar_bringup)/ros2_control/delicar.ros2_control.xacro" />
+  <!-- Import delicar description -->
+  <xacro:delicar prefix="" />
+  
+  <!-- Import delicar ros2_control -->
+  <xacro:unless value="$(arg use_sim)">
+    
+    <xacro:include filename="$(find delicar_bringup)/ros2_control/delicar_controllers.xacro" />
+    
+    <xacro:delicar_ros2_control name="DeliCar" prefix="$(arg prefix)" />
+  </xacro:unless>
 
-  <xacro:delicar prefix="$(arg prefix)" />
-
-  <xacro:delicar_ros2_control
-    name="DeliCar" prefix="$(arg prefix)" />
-
+  <xacro:if value="$(arg use_sim)">
+    
+    <xacro:include filename="$(find delicar_bringup)/ros2_control/gazebo_controllers.xacro" />
+    
+    <xacro:gazebo_ros2_control name="GazeboSystem" prefix="$(arg prefix)" />
+  </xacro:if>
+  
 </robot>
