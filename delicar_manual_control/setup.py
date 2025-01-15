@@ -1,6 +1,6 @@
 from setuptools import find_packages, setup
 
-package_name = 'delicar_keyboard_control'
+package_name = 'delicar_manual_control'
 
 setup(
     name=package_name,
@@ -20,7 +20,7 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'keyboard_controller = delicar_keyboard_control.keyboard_controller:main'
+            'keyboard_controller = delicar_manual_control.keyboard_controller:main'
         ],
     },
 )
