@@ -34,7 +34,7 @@
         <geometry>
           <box size="${base_length} ${base_width} ${base_height}"/>
         </geometry>
-        <material name="orange"/>
+        <material name="red"/>
       </visual>
 
       <inertial>
@@ -66,14 +66,14 @@
     <link name="${prefix}rear_right_wheel">
 
       <collision>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <cylinder length="${wheel_len}" radius="${wheel_radius}"/>
         </geometry>
       </collision>
 
       <visual>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <cylinder length="${wheel_len}" radius="${wheel_radius}"/>
         </geometry>
@@ -81,7 +81,7 @@
       </visual>
 
       <inertial>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="${wheel_mass}"/>
         <inertia
           ixx="${wheel_mass / 12.0 * (3 * wheel_radius*wheel_radius + wheel_len*wheel_len)}"
@@ -97,8 +97,8 @@
     <joint name="${prefix}rear_right_wheel_joint" type="continuous">
       <parent link="${prefix}chassis_link"/>
       <child link="${prefix}rear_right_wheel"/>
-      <origin xyz="-${wheelbase/2} ${base_width/2} -${base_height/2}" rpy="0 0 ${PI/2}"/>
-      <axis xyz="1 0 0"/>
+      <origin xyz="-${wheelbase/2} ${base_width/2} -${base_height/2}" rpy="-${PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
       <limit effort="10.0" velocity="50.0"/>
       <dynamics damping="0.2"/>
     </joint>
@@ -106,14 +106,14 @@
     <!-- rear left wheel -->
     <link name="${prefix}rear_left_wheel">
         <collision>
-          <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
             <cylinder length="${wheel_len}" radius="${wheel_radius}"/>
           </geometry>
         </collision>
 
         <visual>
-          <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
           <geometry>
             <cylinder length="${wheel_len}" radius="${wheel_radius}"/>
           </geometry>
@@ -121,7 +121,7 @@
         </visual>
 
         <inertial>
-          <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+          <origin xyz="0 0 0" rpy="0 0 0"/>
           <mass value="${wheel_mass}"/>
           <inertia
             ixx="${wheel_mass / 12.0 * (3 * wheel_radius*wheel_radius + wheel_len*wheel_len)}"
@@ -137,8 +137,8 @@
     <joint name="${prefix}rear_left_wheel_joint" type="continuous">
       <parent link="${prefix}chassis_link" />
       <child link="${prefix}rear_left_wheel" />
-      <origin xyz="-${wheelbase/2} -${base_width/2} -${base_height/2}" rpy="0 0 ${PI/2}"/>
-      <axis xyz="1 0 0"/>
+      <origin xyz="-${wheelbase/2} -${base_width/2} -${base_height/2}" rpy="-${PI/2} 0 0"/>
+      <axis xyz="0 0 1"/>
       <limit effort="10.0" velocity="50.0"/>
       <dynamics damping="0.2"/>
     </joint>
@@ -183,8 +183,8 @@
     <joint name="${prefix}front_right_steering_joint" type="revolute">
       <parent link="${prefix}chassis_link"/>
       <child link="${prefix}front_right_steering_link"/>
-      <origin xyz="${wheelbase/2} ${base_width/2} -${base_height/2}" rpy="0 0 0"/>
-      <axis xyz="0 0 1"/>
+      <origin xyz="${wheelbase/2} ${base_width/2} -${base_height/2}" rpy="${PI/2} 0 0"/>
+      <axis xyz="0 1 0"/>
       <limit lower="-${PI/4}" upper="${PI/4}" effort="50.0" velocity="1.0"/>
       <dynamics damping="0.1"/>
     </joint>
@@ -227,8 +227,8 @@
     <joint name="${prefix}front_left_steering_joint" type="revolute">
       <parent link="${prefix}chassis_link"/>
       <child link="${prefix}front_left_steering_link"/>
-      <origin xyz="${wheelbase/2} -${base_width/2} -${base_height/2}" rpy="0 0 0"/>
-      <axis xyz="0 0 1"/>
+      <origin xyz="${wheelbase/2} -${base_width/2} -${base_height/2}" rpy="${PI/2} 0 0"/>
+      <axis xyz="0 1 0"/>
       <limit lower="-${PI/4}" upper="${PI/4}" effort="50.0" velocity="1.0"/>
       <dynamics damping="0.1"/>
     </joint>
@@ -241,14 +241,14 @@
     <link name="${prefix}front_right_wheel">
 
       <collision>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <cylinder length="${wheel_len}" radius="${wheel_radius}"/>
         </geometry>
       </collision>
 
       <visual>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <cylinder length="${wheel_len}" radius="${wheel_radius}"/>
         </geometry>
@@ -256,7 +256,7 @@
       </visual>
 
       <inertial>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="${wheel_mass}"/>
         <inertia
           ixx="${wheel_mass / 12.0 * (3 * wheel_radius*wheel_radius + wheel_len*wheel_len)}"
@@ -271,8 +271,8 @@
     <joint name="${prefix}front_right_wheel_joint" type="continuous">
       <parent link="${prefix}front_right_steering_link" />
       <child link="${prefix}front_right_wheel" />
-      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
-      <axis xyz="1 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
       <limit effort="10.0" velocity="50.0"/>
       <dynamics damping="0.2"/>
     </joint>
@@ -281,14 +281,14 @@
 
     <link name="${prefix}front_left_wheel">
       <collision>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <cylinder length="${wheel_len}" radius="${wheel_radius}"/>
         </geometry>
       </collision>
 
       <visual>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
           <cylinder length="${wheel_len}" radius="${wheel_radius}"/>
         </geometry>
@@ -296,7 +296,7 @@
       </visual>
 
       <inertial>
-        <origin xyz="0 0 0" rpy="${PI/2} 0 ${PI/2}"/>
+        <origin xyz="0 0 0" rpy="0 0 0"/>
         <mass value="${wheel_mass}"/>
         <inertia
           ixx="${wheel_mass / 12.0 * (3 * wheel_radius*wheel_radius + wheel_len*wheel_len)}"
@@ -312,8 +312,8 @@
     <joint name="${prefix}front_left_wheel_joint" type="continuous">
       <parent link="${prefix}front_left_steering_link" />
       <child link="${prefix}front_left_wheel" />
-      <origin xyz="0 0 0" rpy="0 0 ${PI/2}"/>
-      <axis xyz="1 0 0"/>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <axis xyz="0 0 1"/>
       <limit effort="10.0" velocity="50.0"/>
       <dynamics damping="0.2"/>
     </joint>

@@ -29,27 +29,27 @@
             <fdir1>1 0 0</fdir1>
         </gazebo> -->
 
-        <gazebo reference="body_link">
+        <gazebo reference="${prefix}chassis_link">
             <mu1>0.0001</mu1>
             <mu2>0.0001</mu2>
         </gazebo>
 
-        <gazebo reference="front_right_wheel_link">
+        <gazebo reference="${prefix}front_right_wheel_link">
             <mu1>100.0</mu1>
             <mu2>100.0</mu2>
         </gazebo>
 
-        <gazebo reference="front_left_wheel_link">
+        <gazebo reference="${prefix}front_left_wheel_link">
             <mu1>100.0</mu1>
             <mu2>100.0</mu2>
         </gazebo>
         
-        <gazebo reference="rear_right_wheel_link">
+        <gazebo reference="${prefix}rear_right_wheel_link">
             <mu1>100.0</mu1>
             <mu2>100.0</mu2>
         </gazebo>
 
-        <gazebo reference="rear_left_wheel_link">
+        <gazebo reference="${prefix}rear_left_wheel_link">
             <mu1>100.0</mu1>
             <mu2>100.0</mu2>
         </gazebo>
@@ -63,6 +63,10 @@
             <mu1>1.0</mu1>
             <mu2>1.0</mu2>
         </gazebo>
+        
+        <gazebo reference="${prefix}chassis_link">
+            <material>Gazebo/Red</material>
+        </gazebo>
 
         <!-- Gazebo Control -->
         <ros2_control name="${name}" type="system">
@@ -75,7 +79,6 @@
                 <param name="min">${-max_steering_angle}</param>
                 <param name="max">${max_steering_angle}</param>
             </command_interface>
-
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
@@ -85,7 +88,6 @@
                 <param name="min">${-max_steering_angle}</param>
                 <param name="max">${max_steering_angle}</param>
             </command_interface>
-
             <state_interface name="position"/>
             <state_interface name="velocity"/>
         </joint>
@@ -95,9 +97,8 @@
                 <param name="min">${-max_velocity}</param>
                 <param name="max">${max_velocity}</param>
             </command_interface>
-
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
+            <state_interface name="velocity" />
+            <state_interface name="position" />
         </joint>
 
         <joint name="rear_right_wheel_joint">
@@ -105,9 +106,8 @@
                 <param name="min">${-max_velocity}</param>
                 <param name="max">${max_velocity}</param>
             </command_interface>
-
-            <state_interface name="position"/>
-            <state_interface name="velocity"/>
+            <state_interface name="velocity" />
+            <state_interface name="position" />
         </joint>
 
         </ros2_control>

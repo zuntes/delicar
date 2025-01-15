@@ -54,14 +54,9 @@ def generate_launch_description():
         output='screen'
     )
 
-    forward_velocity_controller = ExecuteProcess(
+    ackermann_steering_controller = ExecuteProcess(
         cmd=['ros2', 'control', 'load_controller', '--set-state',
-             'active', 'forward_velocity_controller'],
-        output='screen')
-
-    forward_position_controller = ExecuteProcess(
-        cmd=['ros2', 'control', 'load_controller', '--set-state', 'active',
-             'forward_position_controller'],
+             'active', 'ackermann_steering_controller'],
         output='screen')
 
     rviz = Node(
@@ -75,11 +70,6 @@ def generate_launch_description():
     )
 
     return LaunchDescription([
-        gazebo,
-        rviz,
-        node_joint_state_publisher,
-        node_robot_state_publisher,
-        spawn_entity,
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=spawn_entity,
@@ -89,13 +79,12 @@ def generate_launch_description():
         RegisterEventHandler(
             event_handler=OnProcessExit(
                 target_action=load_joint_state_broadcaster,
-                on_exit=[forward_velocity_controller],
+                on_exit=[ackermann_steering_controller],
             )
         ),
-        RegisterEventHandler(
-            event_handler=OnProcessExit(
-                target_action=forward_velocity_controller,
-                on_exit=[forward_position_controller],
-            )
-        ),
+        gazebo,
+        rviz,
+        node_joint_state_publisher,
+        node_robot_state_publisher,
+        spawn_entity,
     ])
