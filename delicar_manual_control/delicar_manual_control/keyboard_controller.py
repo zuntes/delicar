@@ -3,10 +3,11 @@ import select
 import sys
 import rclpy
 
-from geometry_msgs.msg import TwistStamped
+from geometry_msgs.msg import Twist, TwistStamped
 from std_msgs.msg import Header
 
 from rclpy.qos import QoSProfile
+from rclpy.parameter import Parameter
 
 if os.name == 'nt':
     import msvcrt
@@ -14,8 +15,8 @@ else:
     import termios
     import tty
 
-MAX_LIN_VEL = 0.26
-MAX_ANG_VEL = 1.57
+MAX_LIN_VEL = 1
+MAX_ANG_VEL = 0.785
 
 LIN_VEL_STEP_SIZE = 0.01
 ANG_VEL_STEP_SIZE = 0.1
@@ -99,7 +100,16 @@ def main():
 
     qos = QoSProfile(depth=10)
     node = rclpy.create_node('keyboard_controller')
-    pub = node.create_publisher(TwistStamped, '/ackermann_steering_controller/reference', qos)
+    
+    # Add parameter for choosing message type
+    node.declare_parameter('use_stamped_twist', True)
+    use_stamped_twist = node.get_parameter('use_stamped_twist').value
+    
+    # Create publisher based on parameter
+    if use_stamped_twist:
+        pub = node.create_publisher(TwistStamped, '/ackermann_steering_controller/reference', qos)
+    else:
+        pub = node.create_publisher(Twist, '/ackermann_steering_controller/reference', qos)
 
     status = 0
     target_linear_velocity = 0.0
@@ -109,7 +119,7 @@ def main():
 
     try:
         print(msg)
-        while(1):
+        while(rclpy.ok()):
             key = get_key(settings)
             if key == 'w':
                 target_linear_velocity =\
@@ -145,46 +155,62 @@ def main():
                 print(msg)
                 status = 0
 
-            twist_stamped = TwistStamped()
-            twist_stamped.header = Header()
-            twist_stamped.header.stamp = node.get_clock().now().to_msg()
-            twist_stamped.header.frame_id = 'base_link'
-
             control_linear_velocity = make_simple_profile(
                 control_linear_velocity,
                 target_linear_velocity,
                 (LIN_VEL_STEP_SIZE / 2.0))
-
-            twist_stamped.twist.linear.x = control_linear_velocity
-            twist_stamped.twist.linear.y = 0.0
-            twist_stamped.twist.linear.z = 0.0
 
             control_angular_velocity = make_simple_profile(
                 control_angular_velocity,
                 target_angular_velocity,
                 (ANG_VEL_STEP_SIZE / 2.0))
 
-            twist_stamped.twist.angular.x = 0.0
-            twist_stamped.twist.angular.y = 0.0
-            twist_stamped.twist.angular.z = control_angular_velocity
-
-            pub.publish(twist_stamped)
+            if use_stamped_twist:
+                twist_stamped = TwistStamped()
+                twist_stamped.header = Header()
+                twist_stamped.header.stamp = node.get_clock().now().to_msg()
+                # twist_stamped.header.frame_id = 'base_link'
+                twist_stamped.twist.linear.x = control_linear_velocity
+                twist_stamped.twist.linear.y = 0.0
+                twist_stamped.twist.linear.z = 0.0
+                twist_stamped.twist.angular.x = 0.0
+                twist_stamped.twist.angular.y = 0.0
+                twist_stamped.twist.angular.z = control_angular_velocity
+                pub.publish(twist_stamped)
+            else:
+                twist = Twist()
+                twist.linear.x = control_linear_velocity
+                twist.linear.y = 0.0
+                twist.linear.z = 0.0
+                twist.angular.x = 0.0
+                twist.angular.y = 0.0
+                twist.angular.z = control_angular_velocity
+                pub.publish(twist)
 
     except Exception as e:
         print(e)
 
     finally:
-        twist_stamped = TwistStamped()
-        twist_stamped.header = Header()
-        twist_stamped.header.stamp = node.get_clock().now().to_msg()
-        twist_stamped.twist.linear.x = 0.0
-        twist_stamped.twist.linear.y = 0.0
-        twist_stamped.twist.linear.z = 0.0
-        twist_stamped.twist.angular.x = 0.0
-        twist_stamped.twist.angular.y = 0.0
-        twist_stamped.twist.angular.z = 0.0
-
-        pub.publish(twist_stamped)
+        if use_stamped_twist:
+            twist_stamped = TwistStamped()
+            twist_stamped.header = Header()
+            twist_stamped.header.stamp = node.get_clock().now().to_msg()
+            twist_stamped.twist.linear.x = 0.0
+            twist_stamped.twist.linear.y = 0.0
+            twist_stamped.twist.linear.z = 0.0
+            twist_stamped.twist.angular.x = 0.0
+            twist_stamped.twist.angular.y = 0.0
+            twist_stamped.twist.angular.z = 0.0
+            pub.publish(twist_stamped)
+        else:
+            twist = Twist()
+            twist.linear.x = 0.0
+            twist.linear.y = 0.0
+            twist.linear.z = 0.0
+            twist.angular.x = 0.0
+            twist.angular.y = 0.0
+            twist.angular.z = 0.0
+            pub.publish(twist)
 
         if os.name != 'nt':
             termios.tcsetattr(sys.stdin, termios.TCSADRAIN, settings)
