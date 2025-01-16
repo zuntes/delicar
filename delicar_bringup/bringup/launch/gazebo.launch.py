@@ -20,6 +20,12 @@ def generate_launch_description():
     world_file_name = 'test.world'
     world = os.path.join(package_path, 'worlds', world_file_name)
     
+    joystick = IncludeLaunchDescription(
+            PythonLaunchDescriptionSource([os.path.join(
+                get_package_share_directory('delicar_manual_control'),'launch','joy_controller.launch.py'
+            )])
+    )
+    
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('gazebo_ros'), 'launch'), '/gazebo.launch.py']),
@@ -86,6 +92,7 @@ def generate_launch_description():
                 on_exit=[ackermann_steering_controller],
             )
         ),
+        joystick,
         gazebo,
         rviz,
         node_joint_state_publisher,
