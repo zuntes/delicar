@@ -48,7 +48,7 @@ install(
   DESTINATION include/delicar_bringup
 )
 install(
-  DIRECTORY description/launch description/ros2_control description/urdf description/rviz
+  DIRECTORY description/launch description/ros2_control description/urdf description/rviz description/worlds
   DESTINATION share/delicar_bringup
 )
 install(

@@ -14,13 +14,17 @@ import xacro
 
 
 def generate_launch_description():
+    package_path = os.path.join(
+        get_package_share_directory('delicar_bringup'))
+    
+    world_file_name = 'test.world'
+    world = os.path.join(package_path, 'worlds', world_file_name)
+    
     gazebo = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
                     get_package_share_directory('gazebo_ros'), 'launch'), '/gazebo.launch.py']),
-             )
-
-    package_path = os.path.join(
-        get_package_share_directory('delicar_bringup'))
+                    launch_arguments={'world' : world}.items()
+            )
 
     xacro_file = os.path.join(package_path,
                               'urdf',
