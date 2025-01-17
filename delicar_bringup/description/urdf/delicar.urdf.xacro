@@ -15,6 +15,10 @@
   <xacro:include filename="$(find delicar_bringup)/urdf/camera.urdf.xacro" />
   <xacro:camera prefix="$(arg prefix)" />
 
+  <!-- Import imu -->
+  <xacro:include filename="$(find delicar_bringup)/urdf/imu.urdf.xacro" />
+  <xacro:imu prefix="$(arg prefix)" />
+
   <!-- Import delicar description -->
   <xacro:delicar prefix="" />
   

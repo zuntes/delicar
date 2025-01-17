@@ -17,7 +17,7 @@ def generate_launch_description():
     package_path = os.path.join(
         get_package_share_directory('delicar_bringup'))
     
-    world_file_name = 'test.world'
+    world_file_name = 'test_world.model'
     world = os.path.join(package_path, 'worlds', world_file_name)
     
     joystick = IncludeLaunchDescription(
