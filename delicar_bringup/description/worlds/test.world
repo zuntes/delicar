@@ -90,42 +90,6 @@
       <elevation>0</elevation>
       <heading_deg>0</heading_deg>
     </spherical_coordinates>
-    <model name='radio_tower'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>model://radio_tower/meshes/radio_tower.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://radio_tower/meshes/radio_tower.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose>-19.9848 4.79816 0 0 -0 0</pose>
-    </model>
     <model name='school'>
       <static>1</static>
       <link name='link'>
@@ -200,42 +164,6 @@
       </link>
       <pose>-16.8198 24.7953 0 0 -0 0</pose>
     </model>
-    <model name='water_tower'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>model://water_tower/meshes/water_tower.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://water_tower/meshes/water_tower.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose>-18.0217 16.1698 0 0 -0 0</pose>
-    </model>
     <model name='salon'>
       <static>1</static>
       <link name='link'>
@@ -273,42 +201,6 @@
         <kinematic>0</kinematic>
       </link>
       <pose>16.8735 8.35885 0 0 -0 0</pose>
-    </model>
-    <model name='post_office'>
-      <static>1</static>
-      <link name='link'>
-        <collision name='collision'>
-          <geometry>
-            <mesh>
-              <uri>model://post_office/meshes/post_office.dae</uri>
-            </mesh>
-          </geometry>
-          <max_contacts>10</max_contacts>
-          <surface>
-            <contact>
-              <ode/>
-            </contact>
-            <bounce/>
-            <friction>
-              <torsional>
-                <ode/>
-              </torsional>
-              <ode/>
-            </friction>
-          </surface>
-        </collision>
-        <visual name='visual'>
-          <geometry>
-            <mesh>
-              <uri>model://post_office/meshes/post_office.dae</uri>
-            </mesh>
-          </geometry>
-        </visual>
-        <self_collide>0</self_collide>
-        <enable_wind>0</enable_wind>
-        <kinematic>0</kinematic>
-      </link>
-      <pose>24.549 22.2965 0 0 -0 0</pose>
     </model>
     <model name='powerplant'>
       <static>1</static>
@@ -825,25 +717,25 @@
       <pose>113.438 -9.42869 0 0 -0 0</pose>
     </model>
     <state world_name='default'>
-      <sim_time>3557 432000000</sim_time>
-      <real_time>3573 319611928</real_time>
-      <wall_time>1736994645 379177748</wall_time>
-      <iterations>3557432</iterations>
+      <sim_time>4171 879000000</sim_time>
+      <real_time>616 721877451</real_time>
+      <wall_time>1737000172 57865874</wall_time>
+      <iterations>614447</iterations>
       <model name='apartment'>
-        <pose>49.0822 -16.2276 0 0 -0 0</pose>
+        <pose>38.5465 -14.7687 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>49.0822 -16.2276 0 0 -0 0</pose>
+          <pose>38.5465 -14.7687 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='fire_station'>
-        <pose>1.10035 36.7188 0 0 0 -3.13393</pose>
+        <pose>7.61867 31.1715 0 0 0 -3.13393</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>1.10035 36.7188 0 0 0 -3.13393</pose>
+          <pose>7.61867 31.1715 0 0 0 -3.13393</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -860,100 +752,70 @@
         </link>
       </model>
       <model name='law_office'>
-        <pose>15.5052 34.1383 0 0 -0 0</pose>
+        <pose>21.8767 29.4721 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>15.5052 34.1383 0 0 -0 0</pose>
+          <pose>21.8767 29.4721 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='parking_garage'>
-        <pose>20.4561 -57.0119 0 0 -0 0</pose>
+        <pose>19.31 -46.1329 0 0 -0 0</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>20.4561 -57.0119 0 0 -0 0</pose>
+          <pose>19.31 -46.1329 0 0 -0 0</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='police_station'>
-        <pose>42.9226 4.93055 0 -0.044209 -0 -2.77984</pose>
+        <pose>37.0929 12.329 0 -0.041104 -0.016279 3.12646</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>42.9226 4.93055 0 -0.044209 -0 -2.77984</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='post_office'>
-        <pose>33.3391 17.5454 0 0 -0 2.03052</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>33.3391 17.5454 0 0 -0 2.03052</pose>
+          <pose>37.0929 12.329 0 -0.041104 -0.016279 3.12646</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='powerplant'>
-        <pose>-38.1777 2.59152 0 0 -0 1.57</pose>
+        <pose>-32.1497 14.5887 0 0 -0 1.57</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>-38.1777 2.59152 0.01 0 -0 1.57</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='radio_tower'>
-        <pose>41.9211 -31.9034 0 0 -0 0</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>41.9211 -31.9034 0 0 -0 0</pose>
+          <pose>-32.1497 14.5887 0.01 0 -0 1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='salon'>
-        <pose>29.6058 25.9324 0 0 0 -1.0213</pose>
+        <pose>30.1133 26.9096 0 0 0 -0.727755</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>29.6058 25.9324 0 0 0 -1.0213</pose>
+          <pose>30.1133 26.9096 0 0 0 -0.727755</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='school'>
-        <pose>15.2196 -0.599645 0 0 0 -1.57</pose>
+        <pose>16.0941 1.03506 0 0 0 -1.57</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>15.2196 -0.599645 0 0 0 -1.57</pose>
+          <pose>16.0941 1.03506 0 0 0 -1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
         </link>
       </model>
       <model name='thrift_shop'>
-        <pose>23.5216 31.7791 0 0 0 -0.558303</pose>
+        <pose>33.3965 0.162969 0 0 0 -1.57</pose>
         <scale>1 1 1</scale>
         <link name='link'>
-          <pose>23.5216 31.7791 0 0 0 -0.558303</pose>
-          <velocity>0 0 0 0 -0 0</velocity>
-          <acceleration>0 0 0 0 -0 0</acceleration>
-          <wrench>0 0 0 0 -0 0</wrench>
-        </link>
-      </model>
-      <model name='water_tower'>
-        <pose>38.5271 20.1515 0 0 -0 0.368957</pose>
-        <scale>1 1 1</scale>
-        <link name='link'>
-          <pose>38.5271 20.1515 0 0 -0 0.368957</pose>
+          <pose>33.3965 0.162969 0 0 0 -1.57</pose>
           <velocity>0 0 0 0 -0 0</velocity>
           <acceleration>0 0 0 0 -0 0</acceleration>
           <wrench>0 0 0 0 -0 0</wrench>
@@ -965,7 +827,7 @@
     </state>
     <gui fullscreen='0'>
       <camera name='user_camera'>
-        <pose>75.5598 96.5821 92.6688 -0 0.558063 -2.09337</pose>
+        <pose>1.26899 31.9195 51.9469 0 0.801731 -1.40275</pose>
         <view_controller>orbit</view_controller>
         <projection_type>perspective</projection_type>
       </camera>

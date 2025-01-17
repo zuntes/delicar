@@ -15,10 +15,10 @@ else:
     import termios
     import tty
 
-MAX_LIN_VEL = 1
-MAX_ANG_VEL = 0.785
+MAX_LIN_VEL = 1.5
+MAX_ANG_VEL = 1.57
 
-LIN_VEL_STEP_SIZE = 0.01
+LIN_VEL_STEP_SIZE = 0.25
 ANG_VEL_STEP_SIZE = 0.1
 
 msg = """
@@ -109,7 +109,7 @@ def main():
     if use_stamped_twist:
         pub = node.create_publisher(TwistStamped, '/ackermann_steering_controller/reference', qos)
     else:
-        pub = node.create_publisher(Twist, '/ackermann_steering_controller/reference', qos)
+        pub = node.create_publisher(Twist, '/ackermann_steering_controller/reference_unstamped', qos)
 
     status = 0
     target_linear_velocity = 0.0
