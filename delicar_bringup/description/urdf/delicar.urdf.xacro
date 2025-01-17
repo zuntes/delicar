@@ -11,6 +11,10 @@
   <!-- Import colors -->
   <xacro:include filename="$(find delicar_bringup)/urdf/color.materials.xacro" />
 
+  <!-- Import camera -->
+  <xacro:include filename="$(find delicar_bringup)/urdf/camera.urdf.xacro" />
+  <xacro:camera prefix="$(arg prefix)" />
+
   <!-- Import delicar description -->
   <xacro:delicar prefix="" />
   
