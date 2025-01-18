@@ -30,7 +30,7 @@
         </xacro:macro>
 
         <link name="imu_link">
-            <xacro:box_inertia m="0.1" w="0.1" d="0.1" h="0.1" />
+            <xacro:box_inertia m="0.01" w="0.01" d="0.01" h="0.01" />
         </link>
 
         <joint name="${prefix}imu_joint" type="fixed">

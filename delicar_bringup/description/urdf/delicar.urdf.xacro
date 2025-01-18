@@ -6,10 +6,12 @@
 
   <xacro:arg name="use_sim" default="true"/>
 
-  <xacro:include filename="$(find delicar_bringup)/urdf/delicar_description.urdf.xacro" />
-
   <!-- Import colors -->
   <xacro:include filename="$(find delicar_bringup)/urdf/color.materials.xacro" />
+
+  <!-- Import delicar description -->
+  <xacro:include filename="$(find delicar_bringup)/urdf/delicar_description.urdf.xacro" />
+  <xacro:delicar prefix="" />
 
   <!-- Import camera -->
   <xacro:include filename="$(find delicar_bringup)/urdf/camera.urdf.xacro" />
@@ -19,8 +21,9 @@
   <xacro:include filename="$(find delicar_bringup)/urdf/imu.urdf.xacro" />
   <xacro:imu prefix="$(arg prefix)" />
 
-  <!-- Import delicar description -->
-  <xacro:delicar prefix="" />
+  <!-- Import velodyne lidar -->
+  <xacro:include filename="$(find delicar_bringup)/urdf/velodyne_lidar.urdf.xacro" />
+  <xacro:lidar prefix="$(arg prefix)" />
   
   <!-- Import delicar ros2_control -->
   <xacro:unless value="$(arg use_sim)">
