@@ -36,7 +36,7 @@
         <joint name="${prefix}imu_joint" type="fixed">
             <parent link="${prefix}base_link" />
             <child link="${prefix}imu_link" />
-            <origin xyz="0 0 0.01" />
+            <origin rpy="0 3.141592653589793 0" xyz="1.6 0 0.9" />
         </joint>
 
         <gazebo reference="${prefix}imu_link">
