@@ -28,6 +28,9 @@
     </link>
 
     <gazebo reference="velodyne">
+    
+      <material>Gazebo/Gray</material>
+
       <sensor name="velodyne-VLP16" type="ray">
         <visualize>false</visualize>
         <update_rate>10</update_rate>
