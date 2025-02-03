@@ -94,7 +94,7 @@ def generate_launch_description():
         ),
         joystick,
         gazebo,
-        rviz,
+        # rviz,
         node_joint_state_publisher,
         node_robot_state_publisher,
         spawn_entity,
