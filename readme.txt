@@ -1,23 +1,39 @@
-#Delicar-ROS2 
-=====================
+# Delicar-ROS2
 
 ## Overview
 
-This repository contains the code for running Delicar Robot in ROS2.
-Including:
-- `delicar_bringup`: Launch files to start the robot.
-- `delicar_manual_control`: Joystick and keyboard controller to control the robot manually.
+This repository contains the code for running the Delicar Robot in ROS2.
+
+### Included Packages:
+- **`delicar_bringup`**: Launch files to start the robot.
+- **`delicar_manual_control`**: Joystick and keyboard controller for manual robot control.
 
 ## Installation
 
-## Dependencies
+### Dependencies
+
+List any dependencies required to run the packages.
 
 ## Usage
-- To start the simualtion in Gazebo
-``` ros2 launch delicar_bringup gazebo.launch.py ```
-- To run the 3D SLAM package
-``` ros2 launch lio_sam run.launch.py ```
-- To obtain the 2D grid map, you need to run both 3D SLAM node and octomap node at the same time
-``` ros2 launch octomap_server octomap_mapping.launch.xml ```
-- To save the 2D map:
-``` ros2 run nav2_map_server map_saver_cli -f "Your folder (Ex: ~/demo_ws/src/)" --ros-args --remap map:=/projected_map ```
+
+### Start the Simulation in Gazebo
+```bash
+ros2 launch delicar_bringup gazebo.launch.py
+```
+
+### Run the 3D SLAM Package
+```bash
+ros2 launch lio_sam run.launch.py
+```
+
+### Obtain the 2D Grid Map
+To generate a 2D grid map, run both the 3D SLAM node and the Octomap node simultaneously:
+```bash
+ros2 launch octomap_server octomap_mapping.launch.xml
+```
+
+### Save the 2D Map
+```bash
+ros2 run nav2_map_server map_saver_cli -f ~/your_ws/src/ --ros-args --remap map:=/projected_map
+```
+
