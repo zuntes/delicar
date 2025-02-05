@@ -20,4 +20,4 @@ Including:
 - To obtain the 2D grid map, you need to run both 3D SLAM node and octomap node at the same time
 ``` ros2 launch octomap_server octomap_mapping.launch.xml ```
 - To save the 2D map:
-``` ros2 run nav2_map_server map_saver_cli -f ~/demo_ws/src/ --ros-args --remap map:=/projected_map ```
+``` ros2 run nav2_map_server map_saver_cli -f "Your folder (Ex: ~/demo_ws/src/)" --ros-args --remap map:=/projected_map ```
