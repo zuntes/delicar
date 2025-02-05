@@ -9,11 +9,13 @@ This repository contains the code for running the Delicar Robot in ROS2.
 - **`delicar_manual_control`**: Joystick and keyboard controller for manual robot control.
 
 ## Installation
-
-### Dependencies
-
-List any dependencies required to run the packages.
-
+Use the following commands to download and compile the package.
+```bash
+cd ~/your_ws/src
+git clone https://github.com/zuntes/vtp_delicar.git
+cd ..
+rosdep install --from-paths src -y --ignore-src
+```
 ## Usage
 
 ### Start the Simulation in Gazebo
