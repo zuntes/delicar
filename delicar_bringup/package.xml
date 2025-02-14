@@ -4,35 +4,27 @@
   <name>delicar_bringup</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer email="zuntes@todo.todo">zuntes</maintainer>
+  <maintainer email="dung.pt152001@outlook.com">zuntes</maintainer>
   <license>TODO: License declaration</license>
-
-  <license>Apache-2.0</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>backward_ros</depend>
-  <depend>hardware_interface</depend>
-  <depend>pluginlib</depend>
-  <depend>rclcpp</depend>
-  <depend>rclcpp_lifecycle</depend>
-  <depend>delicar_manual_control</depend>
-
-  <exec_depend>bicycle_steering_controller</exec_depend>
-  <exec_depend>controller_manager</exec_depend>
-  <exec_depend>joint_state_broadcaster</exec_depend>
-  <exec_depend>joint_state_publisher_gui</exec_depend>
-  <exec_depend>robot_state_publisher</exec_depend>
-  <exec_depend>ros2controlcli</exec_depend>
-  <exec_depend>ros2launch</exec_depend>
-  <exec_depend>rviz2</exec_depend>
-  <exec_depend>xacro</exec_depend>
-
-  <test_depend>ament_cmake_pytest</test_depend>
-  <test_depend>launch_testing_ros</test_depend>
-  <test_depend>liburdfdom-tools</test_depend>
-  <test_depend>ros2_control_demo_testing</test_depend>
-  <test_depend>xacro</test_depend>
+  <depend>controller_manager</depend>
+  <depend>ros2_controllers</depend>
+  <depend>pointcloud_to_laserscan</depend>
+  <exec_depend>imu_tools</exec_depend>
+  <exec_depend>robot_localization</exec_depend>
+  <exec_depend>joy_linux</exec_depend>
+  <exec_depend>teleop_twist_joy</exec_depend>
+  <exec_depend>teleop_twist_keyboard</exec_depend>
+  <exec_depend>micro_ros_agent</exec_depend>
+  <exec_depend>depthimage_to_laserscan</exec_depend>
+  <exec_depend>laser_filters</exec_depend>
+  <exec_depend>rqt_image_view</exec_depend>
+  <exec_depend>image_proc</exec_depend>
+  <exec_depend>depth_image_proc</exec_depend>
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

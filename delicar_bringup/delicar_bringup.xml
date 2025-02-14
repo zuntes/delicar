@@ -1,8 +1,0 @@
-<library path="delicar_bringup">
-  <class name="delicar_bringup/DeliCarSystemHardware"
-         type="delicar_bringup::DeliCarSystemHardware"
-         base_class_type="hardware_interface::SystemInterface">
-    <description>
-      The ros2_control DeliCar using a system hardware interface-type.
-  </class>
-</library>
