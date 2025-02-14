@@ -20,7 +20,11 @@ rosdep install --from-paths src -y --ignore-src
 
 ### Start the Simulation in Gazebo
 ```bash
-ros2 launch delicar_bringup gazebo.launch.py
+ros2 launch delicar_gazebo gazebo.launch.py
+```
+### Control the robot with joy stick
+```bash
+ros2 launch delicar_manual_control joy_controller.launch.py
 ```
 
 ### Run the 3D SLAM Package
