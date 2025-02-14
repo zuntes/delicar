@@ -2,8 +2,8 @@
   ros__parameters:
 
     # Topics
-    pointCloudTopic: "points_raw"                   # Point cloud data
-    imuTopic: "/imu_raw"                        # IMU data
+    pointCloudTopic: "/lidar/points_raw"         # Point cloud data
+    imuTopic: "/imu/data"                        # IMU data
     odomTopic: "odometry/imu"                    # IMU pre-preintegration odometry, same frequency as IMU
     gpsTopic: "odometry/gpsz"                    # GPS odometry topic from navsat, see module_navsat.launch file
 
@@ -40,8 +40,9 @@
 
     imuGravity: 9.80511
     imuRPYWeight: 0.01
-
-    extrinsicTrans:  [ 0.0,  0.0,  0.100 ]
+    
+    # Extrinsics: T_lb (lidar -> imu)
+    extrinsicTrans:  [ -0.600,  0.0,  -0.625 ]
     #extrinsicRot:    [-1.0,  0.0,  0.0,
     #                   0.0,  1.0,  0.0,
     #                   0.0,  0.0, -1.0 ]
