@@ -23,7 +23,7 @@ def generate_launch_description():
             executable='teleop_node',
             name='joy_teleop_node',
             parameters=[joy_params, {'use_sim_time': use_sim_time}, {'publish_stamped_twist': use_stamped_twist}],
-            remappings=[('/cmd_vel','/ackermann_steering_controller/reference')]
+            remappings=[('/cmd_vel','/cmd_vel_joy')]
          )
 
     return LaunchDescription([

@@ -1,6 +1,10 @@
 import os
+from ament_index_python.packages import get_package_share_directory
+
 from launch import LaunchDescription
 from launch.actions import DeclareLaunchArgument, ExecuteProcess, RegisterEventHandler
+from launch.actions import IncludeLaunchDescription
+from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.event_handlers import OnProcessExit
 from launch.substitutions import LaunchConfiguration, Command, PathJoinSubstitution
 from launch_ros.actions import Node
@@ -59,6 +63,17 @@ def generate_launch_description():
         output='screen'
     )
 
+    # Need to add arguments to the joy_controller and twist_mux launch files
+    joystick = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory('delicar_manual_control'),'launch','joy_controller.launch.py')]),
+    )
+    
+    twist_mux =IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory('twist_mux'),'launch','twist_mux.launch.py'
+                )]),
+    )
     spawn_entity = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
@@ -128,6 +143,8 @@ def generate_launch_description():
         arg_spawn_yaw,
         arg_publish_joints,
         
+        joystick,
+        twist_mux,
         gazebo_process,
         spawn_entity,
         

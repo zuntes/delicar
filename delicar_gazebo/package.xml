@@ -16,6 +16,7 @@
   <depend>robot_localization</depend>
   <depend>delicar_description</depend>
   <depend>delicar_bringup</depend>
+  <depend>twist_mux</depend>
 
   <export>
     <build_type>ament_cmake</build_type>

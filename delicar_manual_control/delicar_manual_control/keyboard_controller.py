@@ -107,7 +107,7 @@ def main():
     
     # Create publisher based on parameter
     if use_stamped_twist:
-        pub = node.create_publisher(TwistStamped, '/ackermann_steering_controller/reference', qos)
+        pub = node.create_publisher(TwistStamped, '/cmd_vel_key', qos)
     else:
         pub = node.create_publisher(Twist, '/ackermann_steering_controller/reference_unstamped', qos)
 
