@@ -11,7 +11,7 @@ def generate_launch_description():
     use_sim_time = True
 
     world_path = PathJoinSubstitution(
-        [FindPackageShare("delicar_gazebo"), "worlds", "empty.world"]
+        [FindPackageShare("delicar_gazebo"), "worlds", "playground.world"]
     )
     urdf_path = PathJoinSubstitution(
         [FindPackageShare("delicar_description"), "urdf", "delicar.urdf.xacro"]
