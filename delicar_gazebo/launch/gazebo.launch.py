@@ -21,6 +21,10 @@ def generate_launch_description():
         [FindPackageShare("delicar_description"), "urdf", "delicar.urdf.xacro"]
     )
 
+    ekf_config_path = PathJoinSubstitution(
+        [FindPackageShare("delicar_bringup"), "config", "ekf.yaml"]
+    )
+
     arg_urdf = DeclareLaunchArgument(
         name='urdf', 
         default_value=urdf_path,
@@ -56,7 +60,7 @@ def generate_launch_description():
         default_value='true',
         description='Launch joint_states_publisher'
     )
-
+# 
     gazebo_process = ExecuteProcess(
         cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so', 
              '-s', 'libgazebo_ros_init.so', LaunchConfiguration('world')],
@@ -133,6 +137,17 @@ def generate_launch_description():
             on_exit=[load_ackermann_controller]
         )
     )
+    
+    localiztion_node = Node(
+            package='robot_localization',
+            executable='ekf_node',
+            name='ekf_filter_node',
+            output='screen',
+            parameters=[
+                {'use_sim_time': use_sim_time}, 
+                ekf_config_path
+            ],
+    )
 
     return LaunchDescription([
         arg_urdf,
@@ -152,5 +167,7 @@ def generate_launch_description():
         robot_state_publisher,
         
         joint_broadcaster_event,
-        ackermann_controller_event
+        ackermann_controller_event,
+        
+        localiztion_node
     ])
