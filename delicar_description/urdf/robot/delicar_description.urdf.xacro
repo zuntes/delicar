@@ -15,20 +15,11 @@
     <xacro:property name="wheel_len" value="0.1" />
     <xacro:property name="wheel_radius" value="0.225" />
 
-    <!-- Base footprint -->
-    <link name="${prefix}base_footprint" />
-
-    <joint name="${prefix}base_to_footprint" type="fixed">
-      <parent link="${prefix}base_footprint" />
-      <child link="${prefix}base_link" />
-      <origin xyz="0 0 ${wheel_radius + base_height/2}" rpy="0 0 0" />
-    </joint>
 
     <!-- Base Link -->
     <link name="${prefix}base_link" />
 
     <!-- Chassis -->
-
     <link name="${prefix}chassis_link">
 
       <visual>
@@ -78,7 +69,7 @@
     <joint name="${prefix}chassis_joint" type="fixed">
       <parent link="${prefix}base_link" />
       <child link="${prefix}chassis_link" />
-      <origin xyz="0 0 0" rpy="0 0 0" />
+      <origin xyz="0 0 ${wheel_radius + base_height/2}" rpy="0 0 0" />
     </joint>
 
 

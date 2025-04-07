@@ -30,7 +30,7 @@
 
     <joint name="${prefix}depth_camera_joint" type="fixed">
         <origin
-        xyz="0.815 0 0.1"
+        xyz="0.815 0 0.525"
         rpy="0 0 0" />
         <parent link="${prefix}base_link" />
         <child link="${prefix}depth_camera_link" />

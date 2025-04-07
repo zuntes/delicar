@@ -1,23 +1,19 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>delicar_gazebo</name>
+  <name>twist_converter</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
-  <maintainer
-    email="dung.pt152001@outlook.com">zuntes</maintainer>
+  <maintainer email="dung.pt152001@outlook.com">zuntes</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>gazebo_ros</depend>
-  <depend>gazebo_ros2_control</depend>
-  <depend>velodyne_simulator</depend>
-  <depend>robot_localization</depend>
-  <depend>delicar_description</depend>
-  <depend>delicar_bringup</depend>
-  <depend>twist_mux</depend>
-  <depend>twist_converter</depend>
+  <depend>geometry_msgs</depend>
+  <depend>std_msgs</depend>
+
+  <test_depend>ament_lint_auto</test_depend>
+  <test_depend>ament_lint_common</test_depend>
 
   <export>
     <build_type>ament_cmake</build_type>

@@ -46,7 +46,7 @@ def generate_launch_description():
             description='Default joystick config file'),
         DeclareLaunchArgument(
             'cmd_vel_out',
-            default_value='/ackermann_steering_controller/reference',
+            default_value='/twist_mux/cmd_vel_out',
             description='cmd vel output topic'),
         DeclareLaunchArgument(
             'use_sim_time',
@@ -62,23 +62,4 @@ def generate_launch_description():
                 LaunchConfiguration('config_topics')]
                 # LaunchConfiguration('config_locks'),
         ),
-        # Node(
-        #     package='twist_mux',
-        #     executable='twist_marker',
-        #     output='screen',
-        #     remappings={('/twist', LaunchConfiguration('cmd_vel_out'))},
-        #     parameters=[{
-        #         'use_sim_time': LaunchConfiguration('use_sim_time'),
-        #         'frame_id': 'base_link',
-        #         'scale': 1.0,
-        #         'vertical_position': 2.0}]),
-        # Node(
-        #     package='twist_mux',
-        #     executable='joystick_relay.py',
-        #     output='screen',
-        #     remappings={('joy_vel_in', 'input_joy/cmd_vel'),
-        #                 ('joy_vel_out', 'joy_vel')},
-        #     parameters=[
-        #         {'use_sim_time': LaunchConfiguration('use_sim_time')},
-        #         LaunchConfiguration('config_joy')])
     ])

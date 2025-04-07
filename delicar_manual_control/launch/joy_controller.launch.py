@@ -33,7 +33,7 @@ def generate_launch_description():
             description='Use sim time if true'),
         DeclareLaunchArgument(
             'use_stamped_twist',
-            default_value='true',
+            default_value='false',
             description='Use stamped twist if true'),
         joy_node,
         teleop_node,

@@ -78,6 +78,17 @@ def generate_launch_description():
                     get_package_share_directory('twist_mux'),'launch','twist_mux.launch.py'
                 )]),
     )
+    twist_converter =IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory('twist_converter'),'launch','twist_converter.launch.py'
+                )]),
+    )
+    
+    ndt_localiztion = IncludeLaunchDescription(
+                PythonLaunchDescriptionSource([os.path.join(
+                    get_package_share_directory('pcl_localization_ros2'),'launch','pcl_localization.launch.py')]),
+    )
+    
     spawn_entity = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
@@ -138,7 +149,7 @@ def generate_launch_description():
         )
     )
     
-    localiztion_node = Node(
+    ekf_node = Node(
             package='robot_localization',
             executable='ekf_node',
             name='ekf_filter_node',
@@ -160,6 +171,8 @@ def generate_launch_description():
         
         joystick,
         twist_mux,
+        twist_converter,
+        
         gazebo_process,
         spawn_entity,
         
@@ -169,5 +182,6 @@ def generate_launch_description():
         joint_broadcaster_event,
         ackermann_controller_event,
         
-        localiztion_node
+        # ndt_localiztion,
+        ekf_node
     ])

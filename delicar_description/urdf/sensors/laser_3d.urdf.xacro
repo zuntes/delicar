@@ -30,7 +30,7 @@
     <joint name="${frame_id}_to_base_link" type="fixed">
       <parent link="${prefix}base_link" />
       <child link="${frame_id}" />
-      <origin xyz="0.6 0 0.265" rpy="0 0 0" />
+      <origin xyz="0.6 0 0.69" rpy="0 0 0" />
     </joint>
 
     <gazebo reference="${frame_id}">

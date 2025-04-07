@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.8)
-project(delicar_bringup)
+project(twist_converter)
 
 if(CMAKE_COMPILER_IS_GNUCXX OR CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   add_compile_options(-Wall -Wextra -Wpedantic)
@@ -7,13 +7,34 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
-# uncomment the following section in order to fill in
-# further dependencies manually.
-# find_package(<dependency> REQUIRED)
+find_package(rclcpp REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(std_msgs REQUIRED)
 
+# Include directories
+include_directories(include)
 
-install(
-  DIRECTORY config launch 
+# Create the twist_converter executable
+add_executable(twist_converter src/twist_converter.cpp)
+ament_target_dependencies(twist_converter
+  rclcpp
+  geometry_msgs
+)
+
+# Install the executable
+install(TARGETS
+  twist_converter
+  DESTINATION lib/${PROJECT_NAME}
+)
+
+# Install header files
+install(DIRECTORY include/
+  DESTINATION include/
+)
+
+# Install launch files
+install(DIRECTORY
+  launch
   DESTINATION share/${PROJECT_NAME}
 )
 

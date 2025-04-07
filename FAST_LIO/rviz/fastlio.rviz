@@ -6,6 +6,11 @@ Panels:
       Expanded:
         - /Global Options1
         - /Status1
+        - /Odometry1
+        - /Path1
+        - /CloudRegistered1
+        - /CloudEffected1
+        - /CloudMap1
       Splitter Ratio: 0.5
     Tree Height: 549
   - Class: rviz_common/Selection
@@ -34,9 +39,35 @@ Visualization Manager:
       Frame Timeout: 15
       Frames:
         All Enabled: true
-        body:
+        base_link:
           Value: true
-        camera_init:
+        chassis_link:
+          Value: true
+        depth_camera_link:
+          Value: true
+        depth_camera_optical_link:
+          Value: true
+        front_left_wheel:
+          Value: true
+        front_right_wheel:
+          Value: true
+        imu_link:
+          Value: true
+        laser_2d:
+          Value: true
+        laser_3d:
+          Value: true
+        left_wheel_steering:
+          Value: true
+        lidar_base:
+          Value: true
+        odom:
+          Value: true
+        rear_left_wheel:
+          Value: true
+        rear_right_wheel:
+          Value: true
+        right_wheel_steering:
           Value: true
       Marker Scale: 1
       Name: TF
@@ -44,9 +75,30 @@ Visualization Manager:
       Show Axes: true
       Show Names: false
       Tree:
-        camera_init:
-          body:
-            {}
+        odom:
+          base_link:
+            chassis_link:
+              left_wheel_steering:
+                front_left_wheel:
+                  {}
+              lidar_base:
+                {}
+              rear_left_wheel:
+                {}
+              rear_right_wheel:
+                {}
+              right_wheel_steering:
+                front_right_wheel:
+                  {}
+            depth_camera_link:
+              depth_camera_optical_link:
+                {}
+            imu_link:
+              {}
+            laser_2d:
+              {}
+            laser_3d:
+              {}
       Update Interval: 0
       Value: true
     - Angle Tolerance: 0.10000000149011612
@@ -86,7 +138,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /Odometry
+        Value: /li_odom
       Value: true
     - Alpha: 1
       Buffer Length: 1
@@ -119,8 +171,8 @@ Visualization Manager:
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 11.062739372253418
-        Min Value: -13.864188194274902
+        Max Value: 2.768043279647827
+        Min Value: -0.46300700306892395
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -214,14 +266,14 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Reliable
-        Value: /Laser_map
+        Value: /laser_map
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
   Enabled: true
   Global Options:
     Background Color: 0; 0; 0
-    Fixed Frame: camera_init
+    Fixed Frame: base_link
     Frame Rate: 30
   Name: root
   Tools:
@@ -264,7 +316,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 216.99887084960938
+      Distance: 18.048078536987305
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -279,10 +331,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 1.5697963237762451
+      Pitch: 0.8697965741157532
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz_default_plugins)
-      Yaw: 4.88355827331543
+      Yaw: 2.403552532196045
     Saved: ~
 Window Geometry:
   Displays:
