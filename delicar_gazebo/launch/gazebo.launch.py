@@ -86,7 +86,7 @@ def generate_launch_description():
     
     ndt_localiztion = IncludeLaunchDescription(
                 PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('pcl_localization_ros2'),'launch','pcl_localization.launch.py')]),
+                    get_package_share_directory('lidar_localization'),'launch','pcl_localization.launch.py')]),
     )
     
     spawn_entity = Node(
