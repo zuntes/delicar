@@ -77,6 +77,6 @@ ros2 launch pointcloud_to_2dmap pointcloud_to_2dmap.launch.py
 ## TODO
 - Need to fix the problem with IMU
 - The rslidar points is different with the velodyne points that are use for many 3D SLAM methods; need to be convert correctly
-
+- Current FAST-LIO is not used so you can remove it. If you still want to use that package, remember to install livox-ros driver and source it.
 
 
