@@ -25,7 +25,7 @@ rosdep install --from-paths src -y --ignore-src
 ## How to run
 
 ### Run the real robot
-If you want to use the real robot, run this
+- If you want to use the real robot, run this
 
 ```bash
 ros2 launch delicar_bringup delicar.launch.py
@@ -33,7 +33,7 @@ ros2 launch delicar_bringup delicar.launch.py
 Remember to check if the RS485 port at /dev/ttyUSB0 or not. Change the config in delicar_controllers.xacro file
 
 ### Run the Simulation in Gazebo
-If you want to use the simulation robot
+- If you want to use the simulation robot
 
 ```bash
 ros2 launch delicar_gazebo gazebo.launch.py
@@ -41,12 +41,11 @@ ros2 launch delicar_gazebo gazebo.launch.py
 In order to run simulation with 3D lidar, you need to install the velodyne gazebo package. If the gazebo fail to start, maybe you miss some model in gazebo, start with empty.world instead.
 
 ### Manual control the robot
-With joy stick
-
+- With joy stick
 ```bash
 ros2 launch delicar_manual_control joy_controller.launch.py
 ```
-or with keyboard
+- Or with keyboard
 ```bash
 ros2 run delicar_manual_control keyboard_controller
 ```
@@ -57,7 +56,7 @@ Right now we using LeGo_LOAM to get the 3D Map
 ros2 launch lego_loam_sr run.launch.py 
 ```
 
-#### Obtain the 2D Grid Map by octomap 
+#### - Obtain the 2D Grid Map by octomap 
 
 To generate a 2D grid map, run both the 3D SLAM node and the Octomap node simultaneously:
 ```bash
@@ -69,7 +68,7 @@ To save the 2D Map
 ros2 run nav2_map_server map_saver_cli -f ~/your_ws/src/ --ros-args --remap map:=/projected_map
 ```
 
-#### Obtain the 2D Grid Map by projection
+#### - Obtain the 2D Grid Map by projection
 Remember to change the link to the .pcd file in the launch params
 ```bash
 ros2 launch pointcloud_to_2dmap pointcloud_to_2dmap.launch.py
