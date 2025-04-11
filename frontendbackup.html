@@ -531,9 +531,9 @@
       iconFeature.setStyle(new ol.style.Style({
         image: new ol.style.Icon({
           anchor: [0.5, 0.5],
-          src: './image/car_icon.png', // Changed to car_icon.png
+          src: './image/car_icon.png',
           scale: 0.2, // Increased scale (0.05 * 4)
-          rotation: toRadians(heading - 90) // Rotate 90 degrees counterclockwise
+          rotation: toRadians(-heading - 90) // Rotate counterclockwise based on heading
         })
       }));
       
@@ -611,92 +611,92 @@
       try {
         // Comment out this section and uncomment for real deployment
         
-        const socket = io('http://localhost:8000', {
-          timeout: 5000,
-          reconnection: true,
-          reconnectionAttempts: Infinity,
-          reconnectionDelay: 1000,
-          reconnectionDelayMax: 5000
-        });
+        // const socket = io('http://localhost:8000', {
+        //   timeout: 5000,
+        //   reconnection: true,
+        //   reconnectionAttempts: Infinity,
+        //   reconnectionDelay: 1000,
+        //   reconnectionDelayMax: 5000
+        // });
         
-        socket.on('connect', () => {
-          console.log('Connected to vehicle tracking server');
+        // socket.on('connect', () => {
+        //   console.log('Connected to vehicle tracking server');
+        //   isConnected = true;
+        //   updateConnectionStatus(true);
+        // });
+        
+        // socket.on('disconnect', () => {
+        //   console.log('Disconnected from vehicle tracking server');
+        //   isConnected = false;
+        //   updateConnectionStatus(false);
+        // });
+        
+        // socket.on('gps_data', (data) => {
+        //   if (data) {
+        //     console.log('Received GPS data:', data);
+        //     // Convert coordinates from the format in the original code
+        //     const rawLat = parseFloat(data.latitude);
+        //     const rawLong = parseFloat(data.longitude);
+        //     const compass = parseFloat(data.compass) || 0;
+            
+        //     const formattedLat = Number(rawLat.toFixed(6));
+        //     const formattedLong = Number(rawLong.toFixed(6));
+            
+        //     // Update coordinates for the map
+        //     updateCarPosition([formattedLong, formattedLat], compass);
+            
+        //     // Update all vehicle data
+        //     updateUI({
+        //       ...data,
+        //       latitude: formattedLat.toString(),
+        //       longitude: formattedLong.toString(),
+        //       compass: `${Number(compass.toFixed(2))}°`
+        //     });
+        //   }
+        // });
+        
+        
+        // Mock connection for demo purposes
+        setTimeout(() => {
           isConnected = true;
           updateConnectionStatus(true);
-        });
-        
-        socket.on('disconnect', () => {
-          console.log('Disconnected from vehicle tracking server');
-          isConnected = false;
-          updateConnectionStatus(false);
-        });
-        
-        socket.on('gps_data', (data) => {
-          if (data) {
-            console.log('Received GPS data:', data);
-            // Convert coordinates from the format in the original code
-            const rawLat = parseFloat(data.latitude);
-            const rawLong = parseFloat(data.longitude);
-            const compass = parseFloat(data.compass) || 0;
+          console.log('Mock connection established');
+          
+          // Simulate vehicle movement for demo purposes
+          let angle = 0;
+          const radius = 0.001; // Small radius for the circular path
+          const centerLat = 21.9314;
+          const centerLong = 106.7088;
+          let startTime = Math.floor(Date.now() / 1000);
+          
+          const interval = setInterval(() => {
+            angle += 0.02; // Slower movement for a car
+            if (angle > Math.PI * 2) angle = 0;
             
-            const formattedLat = Number(rawLat.toFixed(6));
-            const formattedLong = Number(rawLong.toFixed(6));
+            const newLat = centerLat + radius * Math.sin(angle);
+            const newLong = centerLong + radius * Math.cos(angle);
+            const heading = (angle * 180 / Math.PI + 90) % 360;
             
-            // Update coordinates for the map
-            updateCarPosition([formattedLong, formattedLat], compass);
+            updateCarPosition([newLong, newLat], heading);
             
-            // Update all vehicle data
+            const currentTime = Math.floor(Date.now() / 1000);
+            const elapsedSeconds = currentTime - startTime;
+            
             updateUI({
-              ...data,
-              latitude: formattedLat.toString(),
-              longitude: formattedLong.toString(),
-              compass: `${Number(compass.toFixed(2))}°`
+              battery: `${Math.max(30, 100 - Math.floor(angle * 10))}%`,
+              flight_mode: angle > Math.PI ? "DELIVERY" : "TRANSIT",
+              latitude: newLat.toFixed(6),
+              longitude: newLong.toFixed(6),
+              flight_time: formatTime(elapsedSeconds),
+              in_air: "Yes", // For vehicles this represents "in motion"
+              speed: `${(30 + Math.sin(angle) * 5).toFixed(1)} km/h`,
+              compass: `${heading.toFixed(2)}°`,
+              gps: "GPS OK",
+              hdop: "1.2",
+              vdop: "1.5"
             });
-          }
-        });
-        
-        
-    //     // Mock connection for demo purposes
-    //     setTimeout(() => {
-    //       isConnected = true;
-    //       updateConnectionStatus(true);
-    //       console.log('Mock connection established');
-          
-    //       // Simulate vehicle movement for demo purposes
-    //       let angle = 0;
-    //       const radius = 0.001; // Small radius for the circular path
-    //       const centerLat = 21.9314;
-    //       const centerLong = 106.7088;
-    //       let startTime = Math.floor(Date.now() / 1000);
-          
-    //       const interval = setInterval(() => {
-    //         angle += 0.02; // Slower movement for a car
-    //         if (angle > Math.PI * 2) angle = 0;
-            
-    //         const newLat = centerLat + radius * Math.sin(angle);
-    //         const newLong = centerLong + radius * Math.cos(angle);
-    //         const heading = (angle * 180 / Math.PI + 90) % 360;
-            
-    //         updateCarPosition([newLong, newLat], heading);
-            
-    //         const currentTime = Math.floor(Date.now() / 1000);
-    //         const elapsedSeconds = currentTime - startTime;
-            
-    //         updateUI({
-    //           battery: `${Math.max(30, 100 - Math.floor(angle * 10))}%`,
-    //           flight_mode: angle > Math.PI ? "DELIVERY" : "TRANSIT",
-    //           latitude: newLat.toFixed(6),
-    //           longitude: newLong.toFixed(6),
-    //           flight_time: formatTime(elapsedSeconds),
-    //           in_air: "Yes", // For vehicles this represents "in motion"
-    //           speed: `${(30 + Math.sin(angle) * 5).toFixed(1)} km/h`,
-    //           compass: `${heading.toFixed(2)}°`,
-    //           gps: "GPS OK",
-    //           hdop: "1.2",
-    //           vdop: "1.5"
-    //         });
-    //       }, 200);
-    //     }, 2000);
+          }, 200);
+        }, 2000);
         
       } catch (error) {
         console.error('Failed to initialize socket:', error);
