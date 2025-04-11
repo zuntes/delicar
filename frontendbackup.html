@@ -611,7 +611,7 @@
       try {
         // Comment out this section and uncomment for real deployment
         
-        const socket = io('http://192.168.20.125:8013', {
+        const socket = io('http://localhost:8000', {
           timeout: 5000,
           reconnection: true,
           reconnectionAttempts: Infinity,
@@ -631,11 +631,12 @@
           updateConnectionStatus(false);
         });
         
-        socket.on('json', (data) => {
+        socket.on('gps_data', (data) => {
           if (data) {
+            console.log('Received GPS data:', data);
             // Convert coordinates from the format in the original code
-            const rawLat = parseFloat(data.latitude) / 100;
-            const rawLong = parseFloat(data.longitude) / 100;
+            const rawLat = parseFloat(data.latitude);
+            const rawLong = parseFloat(data.longitude);
             const compass = parseFloat(data.compass) || 0;
             
             const formattedLat = Number(rawLat.toFixed(6));
