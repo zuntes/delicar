@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>VIETTEL DELIVERY CAR  CONTROL SYSTEM</title>
+  <title>VIETTEL DELIVERY CAR CONTROL SYSTEM</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@v7.5.1/ol.css">
   <script src="https://cdn.jsdelivr.net/npm/ol@v7.5.1/dist/ol.js"></script>
   <script src="https://cdn.socket.io/4.4.1/socket.io.min.js"></script>
@@ -29,7 +29,6 @@
       background-color: #000;
     }
     
-    /* Top red gradient border */
     .top-border {
       position: absolute;
       top: 0;
@@ -47,7 +46,6 @@
       height: 150px;
     }
     
-    /* Title */
     .title-container {
       position: absolute;
       top: 4px;
@@ -70,12 +68,8 @@
     }
     
     @keyframes pulse-glow {
-      0%, 100% { 
-        box-shadow: 0 0 5px rgba(255, 0, 0, 0.5);
-      }
-      50% { 
-        box-shadow: 0 0 12px rgba(255, 0, 0, 0.8);
-      }
+      0%, 100% { box-shadow: 0 0 5px rgba(255, 0, 0, 0.5); }
+      50% { box-shadow: 0 0 12px rgba(255, 0, 0, 0.8); }
     }
     
     .title {
@@ -90,7 +84,6 @@
       color: #ff0000;
     }
     
-    /* Info header */
     .info-header {
       position: absolute;
       top: 108px;
@@ -171,12 +164,8 @@
     }
     
     @keyframes pulse {
-      0%, 100% { 
-        opacity: 1;
-      }
-      50% { 
-        opacity: 0.5;
-      }
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
     }
     
     .info-connection-text {
@@ -192,7 +181,6 @@
       color: #ff0000;
     }
     
-    /* Video Frame */
     .video-frame {
       position: absolute;
       left: 20px;
@@ -204,6 +192,7 @@
       border-radius: 8px;
       overflow: hidden;
       background-color: #111;
+      transition: all 0.5s ease;
     }
     
     .video-placeholder {
@@ -216,9 +205,79 @@
       color: white;
       font-size: 14px;
       gap: 12px;
+      position: relative;
     }
     
-    /* Stats Panel */
+    .expand-icon {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 24px;
+      height: 24px;
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+    
+    .expand-icon:hover {
+      transform: scale(1.2);
+    }
+    
+    .map-container {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      transition: all 0.5s ease;
+    }
+    
+    .ol-viewport {
+      width: 100% !important;
+      height: 100% !important;
+    }
+    
+    .video-fullscreen {
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      border-radius: 0;
+      z-index: 10;
+    }
+    
+    .map-minimized {
+      position: absolute;
+      left: 20px;
+      top: 660px;
+      width: 400px;
+      height: 250px;
+      border: 2px solid white;
+      border-radius: 8px;
+      z-index: 20;
+      overflow: hidden;
+    }
+    
+    #center-button {
+      position: absolute;
+      bottom: 80px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 1000;
+      padding: 8px 16px;
+      background-color: #000;
+      border: 2px solid #ff0000;
+      color: #00ff00;
+      border-radius: 5px;
+      cursor: pointer;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      transition: all 0.3s ease;
+    }
+    #center-button:hover {
+      background-color: #333;
+      color: #00cc00;
+      border-color: #ff3333;
+    }
+    
     .stats-panel {
       position: absolute;
       bottom: 20px;
@@ -273,63 +332,60 @@
       padding-left: 12px;
     }
     
-    /* Map */
-    .map-container {
+    /* Add zoom controls styling */
+    .zoom-controls {
       position: absolute;
-      inset: 0;
-      z-index: 0;
+      right: 20px;
+      top: 200px;
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
-    #center-button {
-            position: absolute;
-            top: 90%;
-            left: 49%;
-            z-index: 1000;
-            padding: 8px 16px; /* Giảm padding để nút gọn hơn */
-            background-color: #000; /* Màu nền đen */
-            border: 2px solid #ff0000; /* Viền đỏ */
-            color: #00ff00; /* Chữ xanh lá */
-            border-radius: 5px; /* Bo góc */
-            cursor: pointer;
-            font-family: Arial, sans-serif; /* Font chữ đẹp hơn */
-            font-size: 14px; /* Kích thước chữ */
-            transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
-        }
-        #center-button:hover {
-            background-color: #333; /* Đổi nền khi hover */
-            color: #00cc00; /* Chữ sáng hơn khi hover */
-            border-color: #ff3333; /* Viền đỏ sáng hơn */
-        }
-    .ol-viewport {
-      width: 100% !important;
-      height: 100% !important;
+    
+    .zoom-button {
+      width: 40px;
+      height: 40px;
+      background-color: rgba(0, 0, 0, 0.7);
+      border: 1px solid rgba(255, 0, 0, 0.5);
+      border-radius: 4px;
+      color: white;
+      font-size: 20px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .zoom-button:hover {
+      background-color: rgba(51, 51, 51, 0.8);
+      border-color: rgba(255, 0, 0, 0.8);
     }
   </style>
 </head>
 <body>
   <div class="app-container">
-    <!-- Map -->
     <div id="map" class="map-container"></div>
-    <button id="center-button" onclick="centerMap()">Center Map</button>
-    <!-- Top border gradient -->
+    <button id="center-button">Center Map</button>
+    <div class="zoom-controls">
+      <button id="zoom-in" class="zoom-button">+</button>
+      <button id="zoom-out" class="zoom-button">−</button>
+    </div>
     <div class="top-border">
       <div class="top-border-gradient"></div>
     </div>
-    
-    <!-- Title -->
     <div class="title-container">
       <div class="title-wrapper">
         <h1 class="title"><span>VIETTEL</span> DELIVERY CAR CONTROL SYSTEM</h1>
       </div>
     </div>
-    
-    <!-- Info Header -->
     <div class="info-header">
       <div class="info-header-wrapper">
         <div class="info-connection">
           <div id="connection-status" class="info-connection-status connected"></div>
           <span id="connection-text" class="info-connection-text connected-text">Connected</span>
         </div>
-        
         <div class="info-item">
           <div class="info-label">
             <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -340,7 +396,6 @@
           </div>
           <div id="battery" class="info-value">100%</div>
         </div>
-        
         <div class="info-item">
           <div class="info-label">
             <svg class="info-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -354,49 +409,42 @@
           </div>
           <div id="status" class="info-value">STANDBY</div>
         </div>
-        
         <div class="info-item">
           <div class="info-label">Latitude</div>
           <div id="latitude" class="info-value">21.9314</div>
         </div>
-        
         <div class="info-item">
           <div class="info-label">Drive Time</div>
           <div id="drive-time" class="info-value">00:00:00</div>
         </div>
       </div>
     </div>
-    
-    <!-- Video Frame -->
-    <div class="video-frame">
-      <div class="video-placeholder">
+    <div id="video-frame" class="video-frame">
+      <div class="video-placeholder" id="video-placeholder">
         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"></path>
           <circle cx="12" cy="13" r="3"></circle>
         </svg>
         <p id="camera-status">Camera Feed</p>
+        <svg class="expand-icon" id="expand-video-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>
+        </svg>
       </div>
     </div>
-    
-    <!-- Stats Panel -->
     <div class="stats-panel">
       <div class="stats-title">Vehicle Statistics</div>
-      
       <div class="stats-row">
         <span class="stats-label">In Motion:</span>
         <span id="in-motion" class="stats-value">No</span>
       </div>
-      
       <div class="stats-row">
         <span class="stats-label">Speed:</span>
         <span id="speed" class="stats-value">0 km/h</span>
       </div>
-      
       <div class="stats-row">
         <span class="stats-label">Compass:</span>
         <span id="compass" class="stats-value">0°</span>
       </div>
-      
       <div class="stats-group">
         <div class="stats-group-title">GPS Information</div>
         <div class="stats-group-content">
@@ -404,22 +452,18 @@
             <span class="stats-label">Status:</span>
             <span id="gps-status" class="stats-value">GPS OK</span>
           </div>
-          
           <div class="stats-row">
             <span class="stats-label">Latitude:</span>
             <span id="stats-latitude" class="stats-value">21.9314</span>
           </div>
-          
           <div class="stats-row">
             <span class="stats-label">Longitude:</span>
             <span id="longitude" class="stats-value">106.7088</span>
           </div>
-          
           <div class="stats-row">
             <span class="stats-label">HDOP:</span>
             <span id="hdop" class="stats-value">1.2</span>
           </div>
-          
           <div class="stats-row">
             <span class="stats-label">VDOP:</span>
             <span id="vdop" class="stats-value">1.5</span>
@@ -430,47 +474,52 @@
   </div>
 
   <script>
-    // Initialize map and tracking variables
     let map;
+    let view;
     let vectorSource;
     let vectorLayer;
     let iconFeature;
     let pathFeature;
     let points = [];
     let isConnected = false;
-    
-    // Convert degrees to radians
+    let isVideoFullscreen = false;
+    let expandMapIcon = null;
+
     function toRadians(degrees) {
       return degrees * (Math.PI / 180);
     }
-    
-    // Initialize map with OpenLayers
+
     function initMap() {
-      // Initial coordinates
       const initialCoords = [106.7088, 21.9314];
       
-      // Create point feature for the car icon
+      // Create map view
+      view = new ol.View({
+        center: ol.proj.fromLonLat(initialCoords),
+        zoom: 17,
+        minZoom: 2,
+        maxZoom: 20
+      });
+      
+      // Create vehicle icon feature
       iconFeature = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat(initialCoords))
       });
       
-      // Set car icon style using car_icon.png
       iconFeature.setStyle(new ol.style.Style({
         image: new ol.style.Icon({
           anchor: [0.5, 0.5],
-          src: './image/car_icon.png', // Changed to car_icon.png
-          scale: 0.15, // Increased scale (0.05 * 4)
-          rotation: toRadians(-90) // Rotate 90 degrees counterclockwise
+          src: '/image/car_icon.png',
+          scale: 0.15,
+          rotation: toRadians(-90)
         })
       }));
       
-      // Initialize path feature with empty line string
+      // Create path feature
       points.push(ol.proj.fromLonLat(initialCoords));
       pathFeature = new ol.Feature({
         geometry: new ol.geom.LineString(points)
       });
       
-      // Set path style
       pathFeature.setStyle(new ol.style.Style({
         stroke: new ol.style.Stroke({
           color: 'rgba(255, 0, 0, 0.7)',
@@ -487,7 +536,7 @@
         source: vectorSource
       });
       
-      // Create operation radius feature (circle around car)
+      // Create radius feature
       const radiusFeature = new ol.Feature({
         geometry: new ol.geom.Point(ol.proj.fromLonLat(initialCoords))
       });
@@ -513,58 +562,156 @@
         source: radiusSource
       });
       
-      // Initialize map
+      // Create and configure map
       map = new ol.Map({
         target: 'map',
         layers: [
-          // Satellite map layer
           new ol.layer.Tile({
             source: new ol.source.XYZ({
               url: "https://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}&s=Ga"
             })
-      }),
+          }),
           radiusLayer,
           vectorLayer
         ],
-        view: new ol.View({
-          center: ol.proj.fromLonLat(initialCoords),
-          zoom: 17
-        }),
+        view: view,
         controls: []
+      });
+      
+      // Add interaction and scroll handling
+      map.on('pointermove', function(evt) {
+        if (evt.dragging) return;
+        const pixel = map.getEventPixel(evt.originalEvent);
+        const hit = map.hasFeatureAtPixel(pixel);
+        map.getTargetElement().style.cursor = hit ? 'pointer' : 'auto';
+      });
+      
+      // Enable pinch-zoom for touch devices
+      map.getInteractions().forEach(function(interaction) {
+        if (interaction instanceof ol.interaction.MouseWheelZoom) {
+          interaction.setActive(true);
+        }
+        if (interaction instanceof ol.interaction.PinchZoom) {
+          interaction.setActive(true);
+        }
       });
     }
 
     function centerMap() {
-            if (!iconFeature || !map) return;
-            const geometry = iconFeature.getGeometry();
-            if (geometry) {
-                const carPosition = geometry.getCoordinates();
-                map.getView().setCenter(carPosition);
-            }
+      if (!iconFeature || !map) return;
+      const geometry = iconFeature.getGeometry();
+      if (geometry) {
+        const carPosition = geometry.getCoordinates();
+        view.animate({
+          center: carPosition,
+          duration: 500
+        });
+      }
+    }
+
+    function zoomIn() {
+      if (!view) return;
+      const currentZoom = view.getZoom();
+      view.animate({
+        zoom: currentZoom + 1,
+        duration: 250
+      });
+    }
+
+    function zoomOut() {
+      if (!view) return;
+      const currentZoom = view.getZoom();
+      view.animate({
+        zoom: Math.max(2, currentZoom - 1),
+        duration: 250
+      });
+    }
+
+    function toggleFullscreen() {
+      const videoFrame = document.getElementById('video-frame');
+      const mapContainer = document.getElementById('map');
+      const videoPlaceholder = document.getElementById('video-placeholder');
+      
+      if (!isVideoFullscreen) {
+        // Make video fullscreen, map minimized
+        videoFrame.classList.add('video-fullscreen');
+        mapContainer.classList.add('map-minimized');
+        
+        // Remove expand icon from video
+        const expandIcon = document.getElementById('expand-video-icon');
+        if (expandIcon) {
+          expandIcon.remove();
         }
-    // Update car position and heading
+        
+        // Create new expand icon for map
+        expandMapIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        expandMapIcon.setAttribute('class', 'expand-icon');
+        expandMapIcon.setAttribute('id', 'expand-map-icon');
+        expandMapIcon.setAttribute('viewBox', '0 0 24 24');
+        expandMapIcon.setAttribute('fill', 'none');
+        expandMapIcon.setAttribute('stroke', '#fff');
+        expandMapIcon.setAttribute('stroke-width', '2');
+        expandMapIcon.setAttribute('stroke-linecap', 'round');
+        expandMapIcon.setAttribute('stroke-linejoin', 'round');
+        expandMapIcon.innerHTML = '<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>';
+        expandMapIcon.onclick = toggleFullscreen;
+        
+        mapContainer.appendChild(expandMapIcon);
+        
+        isVideoFullscreen = true;
+      } else {
+        // Return to original state
+        videoFrame.classList.remove('video-fullscreen');
+        mapContainer.classList.remove('map-minimized');
+        
+        // Remove expand icon from map
+        if (expandMapIcon) {
+          expandMapIcon.remove();
+        }
+        
+        // Create new expand icon for video
+        const newVideoIcon = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+        newVideoIcon.setAttribute('class', 'expand-icon');
+        newVideoIcon.setAttribute('id', 'expand-video-icon');
+        newVideoIcon.setAttribute('viewBox', '0 0 24 24');
+        newVideoIcon.setAttribute('fill', 'none');
+        newVideoIcon.setAttribute('stroke', '#fff');
+        newVideoIcon.setAttribute('stroke-width', '2');
+        newVideoIcon.setAttribute('stroke-linecap', 'round');
+        newVideoIcon.setAttribute('stroke-linejoin', 'round');
+        newVideoIcon.innerHTML = '<path d="M8 3H5a2 2 0 0 0-2 2v3m18 0V5a2 2 0 0 0-2-2h-3m0 18h3a2 2 0 0 0 2-2v-3M3 16v3a2 2 0 0 0 2 2h3"></path>';
+        newVideoIcon.onclick = toggleFullscreen;
+        
+        videoPlaceholder.appendChild(newVideoIcon);
+        
+        isVideoFullscreen = false;
+      }
+      
+      // Update map size after transition
+      setTimeout(() => {
+        if (map) map.updateSize();
+      }, 550);
+    }
+
     function updateCarPosition(coords, heading) {
       if (!iconFeature || !vectorSource || !pathFeature) return;
       
       const newPosition = ol.proj.fromLonLat(coords);
-      
-      // Update car position
       const geometry = iconFeature.getGeometry();
+      
       if (geometry) {
         geometry.setCoordinates(newPosition);
       }
       
-      // Update car icon rotation using car_icon.png
       iconFeature.setStyle(new ol.style.Style({
         image: new ol.style.Icon({
           anchor: [0.5, 0.5],
-          src: './image/car_icon.png',
-          scale: 0.15, // Increased scale (0.05 * 4)
-          rotation: toRadians(-heading - 90) // Rotate counterclockwise based on heading
+          src: '/image/car_icon.png',
+          scale: 0.15,
+          rotation: toRadians(-heading - 90)
         })
       }));
       
-      // Add point to path
       const lastPoint = points[points.length - 1];
       if (lastPoint) {
         const distance = Math.sqrt(
@@ -572,28 +719,20 @@
           Math.pow(lastPoint[1] - newPosition[1], 2)
         );
         
-        // Only add points that are far enough apart
         if (distance > 5) {
           points.push(newPosition);
-          
-          // Limit the number of points to prevent performance issues
           if (points.length > 100) {
             points = points.slice(-100);
           }
           
-          // Update path geometry
           const pathGeometry = pathFeature.getGeometry();
           if (pathGeometry) {
             pathGeometry.setCoordinates(points);
           }
         }
       }
-      
-      // Note: We're not centering the map on the car as per request
-      // map.getView().setCenter(newPosition);
     }
-    
-    // Update UI elements based on vehicle data
+
     function updateUI(data) {
       document.getElementById('battery').textContent = data.battery;
       document.getElementById('status').textContent = data.flight_mode;
@@ -608,10 +747,8 @@
       document.getElementById('hdop').textContent = data.hdop;
       document.getElementById('vdop').textContent = data.vdop;
       
-      // Update battery color based on percentage
       const batteryPercent = parseInt(data.battery);
       const batteryElement = document.getElementById('battery');
-      
       if (batteryPercent <= 20) {
         batteryElement.style.color = '#ff0000';
       } else if (batteryPercent <= 50) {
@@ -620,123 +757,7 @@
         batteryElement.style.color = '#10FF03';
       }
     }
-    
-    // Format time in HH:MM:SS
-    function formatTime(seconds) {
-      const hours = Math.floor(seconds / 3600);
-      const minutes = Math.floor((seconds % 3600) / 60);
-      const secs = seconds % 60;
-      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
-    }
-    
-    // Initialize map on page load
-    window.addEventListener('DOMContentLoaded', () => {
-      // Initialize the map
-      initMap();
-      
-      // Try to connect to the socket server
-      try {
 
-        // ----------------------------------------Uncomment this section for real deployment------------------------------
-        
-        // const socket = io('http://localhost:8000', {
-        //   timeout: 5000,
-        //   reconnection: true,
-        //   reconnectionAttempts: Infinity,
-        //   reconnectionDelay: 1000,
-        //   reconnectionDelayMax: 5000
-        // });
-        
-        // socket.on('connect', () => {
-        //   console.log('Connected to vehicle tracking server');
-        //   isConnected = true;
-        //   updateConnectionStatus(true);
-        // });
-        
-        // socket.on('disconnect', () => {
-        //   console.log('Disconnected from vehicle tracking server');
-        //   isConnected = false;
-        //   updateConnectionStatus(false);
-        // });
-        
-        // socket.on('gps_data', (data) => {
-        //   if (data) {
-        //     console.log('Received GPS data:', data);
-        //     // Convert coordinates from the format in the original code
-        //     const rawLat = parseFloat(data.latitude);
-        //     const rawLong = parseFloat(data.longitude);
-        //     const compass = parseFloat(data.compass) || 0;
-            
-        //     const formattedLat = Number(rawLat.toFixed(6));
-        //     const formattedLong = Number(rawLong.toFixed(6));
-            
-        //     // Update coordinates for the map
-        //     updateCarPosition([formattedLong, formattedLat], compass);
-            
-        //     // Update all vehicle data
-        //     updateUI({
-        //       ...data,
-        //       latitude: formattedLat.toString(),
-        //       longitude: formattedLong.toString(),
-        //       compass: `${Number(compass.toFixed(2))}°`
-        //     });
-        //   }
-        // });
-
-        // -----------------------------------------Uncomment this section for real deployment------------------------------
-        
-        
-        // Comment if dont want to circle the car
-        setTimeout(() => {
-          isConnected = true;
-          updateConnectionStatus(true);
-          console.log('Mock connection established');
-          
-          // Simulate vehicle movement for demo purposes
-          let angle = 0;
-          const radius = 0.001; // Small radius for the circular path
-          const centerLat = 21.9314;
-          const centerLong = 106.7088;
-          let startTime = Math.floor(Date.now() / 1000);
-          
-          const interval = setInterval(() => {
-            angle += 0.02; // Slower movement for a car
-            if (angle > Math.PI * 2) angle = 0;
-            
-            const newLat = centerLat + radius * Math.sin(angle);
-            const newLong = centerLong + radius * Math.cos(angle);
-            const heading = (angle * 180 / Math.PI + 90) % 360;
-            
-            updateCarPosition([newLong, newLat], heading);
-            
-            const currentTime = Math.floor(Date.now() / 1000);
-            const elapsedSeconds = currentTime - startTime;
-            
-            updateUI({
-              battery: `${Math.max(30, 100 - Math.floor(angle * 10))}%`,
-              flight_mode: angle > Math.PI ? "DELIVERY" : "TRANSIT",
-              latitude: newLat.toFixed(6),
-              longitude: newLong.toFixed(6),
-              flight_time: formatTime(elapsedSeconds),
-              in_air: "Yes", // For vehicles this represents "in motion"
-              speed: `${(30 + Math.sin(angle) * 5).toFixed(1)} km/h`,
-              compass: `${heading.toFixed(2)}°`,
-              gps: "GPS OK",
-              hdop: "1.2",
-              vdop: "1.5"
-            });
-          }, 200);
-        }, 2000);
-      
-      // ------------------------------------------comment this section for real deployment------------------------------
-        
-      } catch (error) {
-        console.error('Failed to initialize socket:', error);
-        updateConnectionStatus(false);
-      }
-    });
-    
-    // Update connection status indicators
     function updateConnectionStatus(connected) {
       const statusElement = document.getElementById('connection-status');
       const textElement = document.getElementById('connection-text');
@@ -754,6 +775,142 @@
         cameraElement.textContent = 'No Camera Feed';
       }
     }
-</script>
+
+    function formatTime(seconds) {
+      const hours = Math.floor(seconds / 3600);
+      const minutes = Math.floor((seconds % 3600) / 60);
+      const secs = seconds % 60;
+      return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function setupImageBasedOnSupport() {
+      // Create a test image to check if car_icon.png exists
+      const testImg = new Image();
+      testImg.onload = function() {
+        // Image exists, no action needed
+        console.log('Car icon loaded successfully');
+      };
+      testImg.onerror = function() {
+        // Image doesn't exist, fall back to svg icon
+        console.warn('Car icon not found, using fallback SVG');
+        iconFeature.setStyle(new ol.style.Style({
+          image: new ol.style.Circle({
+            radius: 6,
+            fill: new ol.style.Fill({
+              color: 'red'
+            }),
+            stroke: new ol.style.Stroke({
+              color: 'white',
+              width: 2
+            })
+          })
+        }));
+      };
+      testImg.src = './image/car_icon.png';
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Initialize map
+      initMap();
+      
+      // Setup image handling
+      setupImageBasedOnSupport();
+      
+      // Set up event listeners
+      document.getElementById('center-button').addEventListener('click', centerMap);
+      document.getElementById('expand-video-icon').addEventListener('click', toggleFullscreen);
+      document.getElementById('zoom-in').addEventListener('click', zoomIn);
+      document.getElementById('zoom-out').addEventListener('click', zoomOut);
+      
+      // Add handling for pinch and mousewheel zoom support
+      map.on('wheel', function(event) {
+        // Prevent the default behavior to allow our custom zooming
+        event.preventDefault();
+      });
+      
+      try {
+        // ----------------------------------------Uncomment this section for real deployment------------------------------
+        // const socket = io('http://localhost:8000', {
+        //   timeout: 5000,
+        //   reconnection: true,
+        //   reconnectionAttempts: Infinity,
+        //   reconnectionDelay: 1000,
+        //   reconnectionDelayMax: 5000
+        // });
+        // socket.on('connect', () => {
+        //   console.log('Connected to vehicle tracking server');
+        //   isConnected = true;
+        //   updateConnectionStatus(true);
+        // });
+        // socket.on('disconnect', () => {
+        //   console.log('Disconnected from vehicle tracking server');
+        //   isConnected = false;
+        //   updateConnectionStatus(false);
+        // });
+        // socket.on('gps_data', (data) => {
+        //   if (data) {
+        //     console.log('Received GPS data:', data);
+        //     const rawLat = parseFloat(data.latitude);
+        //     const rawLong = parseFloat(data.longitude);
+        //     const compass = parseFloat(data.compass) || 0;
+        //     const formattedLat = Number(rawLat.toFixed(6));
+        //     const formattedLong = Number(rawLong.toFixed(6));
+        //     updateCarPosition([formattedLong, formattedLat], compass);
+        //     updateUI({
+        //       ...data,
+        //       latitude: formattedLat.toString(),
+        //       longitude: formattedLong.toString(),
+        //       compass: `${Number(compass.toFixed(2))}°`
+        //     });
+        //   }
+        // });
+        // -----------------------------------------Uncomment this section for real deployment------------------------------
+
+        // For demo/testing, simulate data
+        setTimeout(() => {
+          isConnected = true;
+          updateConnectionStatus(true);
+          console.log('Mock connection established');
+          
+          let angle = 0;
+          const radius = 0.001;
+          const centerLat = 21.9314;
+          const centerLong = 106.7088;
+          let startTime = Math.floor(Date.now() / 1000);
+          
+          const interval = setInterval(() => {
+            angle += 0.02;
+            if (angle > Math.PI * 2) angle = 0;
+            
+            const newLat = centerLat + radius * Math.sin(angle);
+            const newLong = centerLong + radius * Math.cos(angle);
+            const heading = (angle * 180 / Math.PI + 90) % 360;
+            
+            updateCarPosition([newLong, newLat], heading);
+            
+            const currentTime = Math.floor(Date.now() / 1000);
+            const elapsedSeconds = currentTime - startTime;
+            
+            updateUI({
+              battery: `${Math.max(30, 100 - Math.floor(angle * 10))}%`,
+              flight_mode: angle > Math.PI ? "DELIVERY" : "TRANSIT",
+              latitude: newLat.toFixed(6),
+              longitude: newLong.toFixed(6),
+              flight_time: formatTime(elapsedSeconds),
+              in_air: "Yes",
+              speed: `${(30 + Math.sin(angle) * 5).toFixed(1)} km/h`,
+              compass: `${heading.toFixed(2)}°`,
+              gps: "GPS OK",
+              hdop: "1.2",
+              vdop: "1.5"
+            });
+          }, 200);
+        }, 2000);
+      } catch (error) {
+        console.error('Failed to initialize:', error);
+        updateConnectionStatus(false);
+      }
+    });
+  </script>
 </body>
 </html>
