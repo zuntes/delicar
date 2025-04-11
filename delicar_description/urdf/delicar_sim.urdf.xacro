@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!-- 4 Wheel Robot with front steering and rear drive -->
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="delicar_robot">
+
+  <xacro:arg name="prefix" default="" />
+
+  <xacro:arg name="use_sim" default="true" />
+
+  <xacro:include filename="$(find delicar_description)/urdf/robot/delicar_sim_description.urdf.xacro" />
+  <xacro:include filename="$(find delicar_description)/urdf/sensors/depth_camera.urdf.xacro" />
+  <xacro:include filename="$(find delicar_description)/urdf/sensors/imu.urdf.xacro" />
+  <xacro:include filename="$(find delicar_description)/urdf/sensors/laser_3d.urdf.xacro" />
+  <xacro:include filename="$(find delicar_description)/urdf/controllers/delicar_controllers.xacro" />
+  <xacro:include filename="$(find delicar_description)/urdf/controllers/gazebo_controllers.xacro" />
+
+
+  <!-- Import delicar description -->
+  <xacro:delicar prefix="$(arg prefix)" />
+
+  <!-- Import camera -->
+  <xacro:depth_camera prefix="$(arg prefix)" />
+
+  <!-- Import imu -->
+  <xacro:imu prefix="$(arg prefix)"/>
+
+  <!-- Import 3d lidar -->
+  <xacro:laser_3d
+    prefix="$(arg prefix)"
+    update_rate="10"
+    ray_count="440"
+    line_count="16"
+    hor_min_angle="-3.14159"
+    hor_max_angle="3.14159"
+    ver_min_angle="-0.2617"
+    ver_max_angle="0.2617"
+    min_range="0.3"
+    max_range="130.0"
+    frame_id="laser_3d"
+    topic_name="lidar/points_raw"
+  />
+  
+  <!-- Import controllers -->
+  <xacro:gazebo_ros2_control name="GazeboSystem" prefix="$(arg prefix)" />
+
+</robot>

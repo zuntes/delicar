@@ -1,0 +1,9 @@
+<library path="delicar_bringup">
+  <class name="delicar_bringup/CarlikeBotSystemHardware"
+         type="delicar_bringup::CarlikeBotSystemHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Delicar hardware interface layer
+    </description>
+  </class>
+</library>

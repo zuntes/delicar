@@ -18,7 +18,7 @@ def generate_launch_description():
         [FindPackageShare("delicar_gazebo"), "worlds", "playground.world"]
     )
     urdf_path = PathJoinSubstitution(
-        [FindPackageShare("delicar_description"), "urdf", "delicar.urdf.xacro"]
+        [FindPackageShare("delicar_description"), "urdf", "delicar_sim.urdf.xacro"]
     )
 
     ekf_config_path = PathJoinSubstitution(
@@ -83,12 +83,6 @@ def generate_launch_description():
                     get_package_share_directory('twist_converter'),'launch','twist_converter.launch.py'
                 )]),
     )
-    
-    ndt_localiztion = IncludeLaunchDescription(
-                PythonLaunchDescriptionSource([os.path.join(
-                    get_package_share_directory('lidar_localization'),'launch','pcl_localization.launch.py')]),
-    )
-    
     spawn_entity = Node(
         package='gazebo_ros',
         executable='spawn_entity.py',
@@ -149,7 +143,7 @@ def generate_launch_description():
         )
     )
     
-    ekf_node = Node(
+    localiztion_node = Node(
             package='robot_localization',
             executable='ekf_node',
             name='ekf_filter_node',
@@ -182,6 +176,5 @@ def generate_launch_description():
         joint_broadcaster_event,
         ackermann_controller_event,
         
-        # ndt_localiztion,
-        ekf_node
+        # localiztion_node
     ])

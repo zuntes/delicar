@@ -5,9 +5,21 @@
 
     <ros2_control name="${name}" type="system">
       <hardware>
-        <plugin>delicar_bringup/DeliCarSystemHardware</plugin>
-        <param name="hw_start_duration_sec">0</param>
-        <param name="hw_stop_duration_sec">3.0</param>
+        <plugin>delicar_bringup/CarlikeBotSystemHardware</plugin>
+        <param name="drive_wheel_name">virtual_rear_wheel_joint</param>
+        <param name="steer_wheel_name">virtual_front_wheel_joint</param>
+        <param name="serial_port">/dev/ttyUSB0</param>
+        <param name="baud_rate">9600</param>
+        <param name="parity">O</param>
+        <param name="data_bits">8</param>
+        <param name="stop_bits">1</param>
+        <param name="slave_id">1</param>
+        <param name="traction_speed_cmd_register">0</param>
+        <param name="traction_speed_fb_register">2</param>
+        <param name="steering_angle_cmd_register">1</param>
+        <param name="steering_angle_fb_register">6</param>
+        <param name="steering_scale_factor">327.4</param>
+        <param name="traction_scale_factor">1</param>
       </hardware>
       <joint name="${prefix}virtual_front_wheel_joint">
         <command_interface name="position"/>
