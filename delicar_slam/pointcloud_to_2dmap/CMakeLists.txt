@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(pointcloud_to_2dmap_ros2)
+project(pointcloud_to_2dmap)
 
 # Find dependencies
 find_package(ament_cmake REQUIRED)
