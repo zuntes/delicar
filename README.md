@@ -6,14 +6,13 @@ This repository contains the code for running the Viettel Post's Delicar Robot i
 
 ## Dependencies
 The following dependencies are required to run the Delicar:
-
-ROS2 (tested on Humble)
-ros2_control
-libmodbus
-gazebo-ros
-SLAM packages: Lego-LOAM, LIO-SAM (follow their instruction for installation)
-octomap-ros
-nav2-ros
+- ROS2 (tested on Humble)
+- ros2_control
+- libmodbus
+- gazebo-ros
+- SLAM packages: Lego-LOAM, LIO-SAM (follow their instruction for installation)
+- octomap-ros
+- nav2-ros
 
 ## Installation
 Use the following commands to download and compile the package.
