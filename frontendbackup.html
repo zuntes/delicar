@@ -279,7 +279,26 @@
       inset: 0;
       z-index: 0;
     }
-    
+    #center-button {
+            position: absolute;
+            top: 90%;
+            left: 49%;
+            z-index: 1000;
+            padding: 8px 16px; /* Giảm padding để nút gọn hơn */
+            background-color: #000; /* Màu nền đen */
+            border: 2px solid #ff0000; /* Viền đỏ */
+            color: #00ff00; /* Chữ xanh lá */
+            border-radius: 5px; /* Bo góc */
+            cursor: pointer;
+            font-family: Arial, sans-serif; /* Font chữ đẹp hơn */
+            font-size: 14px; /* Kích thước chữ */
+            transition: all 0.3s ease; /* Hiệu ứng chuyển đổi mượt */
+        }
+        #center-button:hover {
+            background-color: #333; /* Đổi nền khi hover */
+            color: #00cc00; /* Chữ sáng hơn khi hover */
+            border-color: #ff3333; /* Viền đỏ sáng hơn */
+        }
     .ol-viewport {
       width: 100% !important;
       height: 100% !important;
@@ -290,7 +309,7 @@
   <div class="app-container">
     <!-- Map -->
     <div id="map" class="map-container"></div>
-    
+    <button id="center-button" onclick="centerMap()">Center Map</button>
     <!-- Top border gradient -->
     <div class="top-border">
       <div class="top-border-gradient"></div>
@@ -514,7 +533,15 @@
         controls: []
       });
     }
-    
+
+    function centerMap() {
+            if (!iconFeature || !map) return;
+            const geometry = iconFeature.getGeometry();
+            if (geometry) {
+                const carPosition = geometry.getCoordinates();
+                map.getView().setCenter(carPosition);
+            }
+        }
     // Update car position and heading
     function updateCarPosition(coords, heading) {
       if (!iconFeature || !vectorSource || !pathFeature) return;
