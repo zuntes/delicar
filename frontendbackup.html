@@ -440,7 +440,7 @@
         image: new ol.style.Icon({
           anchor: [0.5, 0.5],
           src: './image/car_icon.png', // Changed to car_icon.png
-          scale: 0.2, // Increased scale (0.05 * 4)
+          scale: 0.15, // Increased scale (0.05 * 4)
           rotation: toRadians(-90) // Rotate 90 degrees counterclockwise
         })
       }));
@@ -532,7 +532,7 @@
         image: new ol.style.Icon({
           anchor: [0.5, 0.5],
           src: './image/car_icon.png',
-          scale: 0.2, // Increased scale (0.05 * 4)
+          scale: 0.15, // Increased scale (0.05 * 4)
           rotation: toRadians(-heading - 90) // Rotate counterclockwise based on heading
         })
       }));
@@ -609,7 +609,8 @@
       
       // Try to connect to the socket server
       try {
-        // Comment out this section and uncomment for real deployment
+
+        // ----------------------------------------Uncomment this section for real deployment------------------------------
         
         // const socket = io('http://localhost:8000', {
         //   timeout: 5000,
@@ -654,9 +655,11 @@
         //     });
         //   }
         // });
+
+        // -----------------------------------------Uncomment this section for real deployment------------------------------
         
         
-        // Mock connection for demo purposes
+        // Comment if dont want to circle the car
         setTimeout(() => {
           isConnected = true;
           updateConnectionStatus(true);
@@ -697,6 +700,8 @@
             });
           }, 200);
         }, 2000);
+      
+      // ------------------------------------------comment this section for real deployment------------------------------
         
       } catch (error) {
         console.error('Failed to initialize socket:', error);
