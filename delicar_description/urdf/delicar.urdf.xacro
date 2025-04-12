@@ -20,7 +20,7 @@
   <!-- <xacro:depth_camera prefix="$(arg prefix)" /> -->
 
   <!-- Import imu -->
-  <xacro:imu prefix="$(arg prefix)"/>
+  <!-- <xacro:imu prefix="$(arg prefix)"/> -->
 
   <!-- Import 3d lidar -->
   <xacro:lidar_3d 
