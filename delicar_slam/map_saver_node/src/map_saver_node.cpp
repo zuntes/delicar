@@ -15,18 +15,18 @@ public:
   MapSaverNode() : Node("map_saver_node")
   {
     // Parameters
-    this->declare_parameter("cloud_topic", "/lego_loam/cloud_registered");
-    this->declare_parameter("save_path", "lego_loam_map.pcd");
+    this->declare_parameter("cloud_topic", "/laser_cloud_surround");
+    this->declare_parameter("save_file_name", "lego_loam_map.pcd");
     this->declare_parameter("auto_save", false);
     this->declare_parameter("auto_save_timer", 60.0);  // In seconds
     
     cloud_topic_ = this->get_parameter("cloud_topic").as_string();
-    save_path_ = this->get_parameter("save_path").as_string();
+    save_file_name_ = this->get_parameter("save_file_name").as_string();
     auto_save_ = this->get_parameter("auto_save").as_bool();
     auto_save_timer_ = this->get_parameter("auto_save_timer").as_double();
     
     RCLCPP_INFO(this->get_logger(), "Subscribing to topic: %s", cloud_topic_.c_str());
-    RCLCPP_INFO(this->get_logger(), "Map will be saved to: %s", save_path_.c_str());
+    RCLCPP_INFO(this->get_logger(), "Map will be saved to: %s", save_file_name_.c_str());
     
     // Create service to save map
     save_service_ = this->create_service<std_srvs::srv::Trigger>(
@@ -38,7 +38,6 @@ public:
       cloud_topic_, 10, 
       std::bind(&MapSaverNode::cloud_callback, this, std::placeholders::_1));
     
-    // Setup timer for auto save if enabled
     if (auto_save_) {
       auto_save_timer_obj_ = this->create_wall_timer(
         std::chrono::duration<double>(auto_save_timer_),
@@ -70,9 +69,9 @@ private:
       
       // Save to file
       RCLCPP_INFO(this->get_logger(), "Saving map with %lu points to %s", 
-                pcl_cloud->points.size(), save_path_.c_str());
+                pcl_cloud->points.size(), save_file_name_.c_str());
       
-      if (pcl::io::savePCDFileBinary(save_path_, *pcl_cloud) == 0) {
+      if (pcl::io::savePCDFileBinary(save_file_name_, *pcl_cloud) == 0) {
         RCLCPP_INFO(this->get_logger(), "Map saved successfully");
       } else {
         RCLCPP_ERROR(this->get_logger(), "Failed to save map");
@@ -94,7 +93,7 @@ private:
   {
     save_map();
     response->success = true;
-    response->message = "Map saved to " + save_path_;
+    response->message = "Map saved to " + save_file_name_;
   }
 
   rclcpp::Subscription<sensor_msgs::msg::PointCloud2>::SharedPtr subscription_;
@@ -103,7 +102,7 @@ private:
   
   sensor_msgs::msg::PointCloud2::SharedPtr latest_cloud_;
   std::string cloud_topic_;
-  std::string save_path_;
+  std::string save_file_name_;
   bool auto_save_;
   double auto_save_timer_;
 };
