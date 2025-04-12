@@ -1,6 +1,6 @@
 <robot xmlns:xacro="http://ros.org/wiki/xacro">
   <xacro:property name="M_PI" value="3.1415926535897931" />
-  <xacro:macro name="lidar_3d" params="prefix frame_id">
+  <xacro:macro name="rslidar" params="prefix frame_id">
     <link name="${frame_id}">
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0" />
@@ -29,7 +29,7 @@
     <joint name="lidar_to_base_link" type="fixed">
       <parent link="${prefix}base_link" />
       <child link="${frame_id}" />
-      <origin xyz="0.93 0 1.535" rpy="0 0.261 0" />
+      <origin xyz="0.93 0 1.4" rpy="0 0 0" />
     </joint>
 
   </xacro:macro>
