@@ -23,8 +23,8 @@ from ultralytics.engine.results import Keypoints
 from visualization_msgs.msg import Marker
 from visualization_msgs.msg import MarkerArray
 
-from boxmot import DeepOCSORT
-from boxmot import OCSORT
+from boxmot import DeepOcSort
+from boxmot import OcSort
 
 from yolo_msgs.msg import Point2D
 from yolo_msgs.msg import BoundingBox2D
@@ -81,7 +81,7 @@ class TrackerNode(Node):
 
         if self.use_ReID:
             self.get_logger().info(f"Using Re-Identification")
-            self.tracker = DeepOCSORT(
+            self.tracker = DeepOcSort(
                 model_weights=Path("osnet_x0_25_msmt17.pt"),  # which ReID model to use
                 device=self.device,
                 fp16=False,
@@ -90,7 +90,7 @@ class TrackerNode(Node):
                 iou_threshold=0.4,
             )
         else:
-            self.tracker = OCSORT(
+            self.tracker = OcSort(
                 det_thresh=0.5,
                 max_age=10,
                 min_hits=3,
@@ -106,7 +106,7 @@ class TrackerNode(Node):
 
         # Subscriber
         self.img_raw = self.create_subscription(
-            Image, "/camera/image_raw", self.image_callback, image_qos_profile
+            Image, "/camera/camera/color/image_raw", self.image_callback, image_qos_profile
         )
 
     def image_callback(self, msg: Image):

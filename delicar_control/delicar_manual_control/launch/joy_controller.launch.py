@@ -23,7 +23,22 @@ def generate_launch_description():
             executable='teleop_node',
             name='joy_teleop_node',
             parameters=[joy_params, {'use_sim_time': use_sim_time}, {'publish_stamped_twist': use_stamped_twist}],
-            remappings=[('/cmd_vel','/bicycle_steering_controller/reference')]
+            remappings=[('/cmd_vel','/teleop_twist_joy/cmd_vel')]  
+         )
+         
+    watchdog_node = Node(
+            package='delicar_manual_control', 
+            executable='joystick_watchdog',
+            name='joystick_watchdog',
+            parameters=[
+                {'use_sim_time': use_sim_time},
+                {'use_stamped_twist': use_stamped_twist},
+                {'timeout': 0.2},
+                {'input_topic': '/teleop_twist_joy/cmd_vel'},
+                {'max_identical_msgs' : 3},
+                {'output_topic': '/bicycle_steering_controller/reference'},
+                {'debug': False}
+            ],
          )
 
     return LaunchDescription([
@@ -37,4 +52,5 @@ def generate_launch_description():
             description='Use stamped twist if true'),
         joy_node,
         teleop_node,
+        watchdog_node,
     ])

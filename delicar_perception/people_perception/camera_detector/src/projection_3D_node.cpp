@@ -42,17 +42,17 @@ public:
         RCLCPP_INFO(this->get_logger(), "Start projection from image to 3D node");
 
         // Params
-        target_frame_ = this->declare_parameter<std::string>("target_frame", "base_link");
+        target_frame_ = this->declare_parameter<std::string>("target_frame", "camera_link");
 
         // Publisher
         tracks_3D_pub_ = this->create_publisher<yolo_msgs::msg::TrackArray>("/camera/track_3D_array", 50);
 
         // Subcriber
         camera_info_sub_ = this->create_subscription<sensor_msgs::msg::CameraInfo>(
-            "/camera/depth/camera_info", 10, std::bind(&ProjectionNode::camera_info_callback, this, _1));
+            "/camera/camera/depth/camera_info", 10, std::bind(&ProjectionNode::camera_info_callback, this, _1));
 
         // Sync handle
-        depth_img_sub_.subscribe(this, "/camera/depth/image_raw", rmw_qos_profile_system_default);
+        depth_img_sub_.subscribe(this, "/camera/camera/depth/image_rect_raw", rmw_qos_profile_system_default);
         tracks_sub_.subscribe(this, "camera/track_2D_array", rmw_qos_profile_system_default);
 
         sync_ = std::make_shared<message_filters::Synchronizer<SyncPolicy>>(SyncPolicy(50), depth_img_sub_, tracks_sub_);

@@ -22,7 +22,8 @@ setup(
     tests_require=['pytest'],
     entry_points={
         'console_scripts': [
-            'keyboard_controller = delicar_manual_control.keyboard_controller:main'
+            'keyboard_controller = delicar_manual_control.keyboard_controller:main',
+            'joystick_watchdog = delicar_manual_control.joystick_watchdog:main'
         ],
     },
 )
