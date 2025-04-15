@@ -49,10 +49,10 @@ public:
 
         // Subcriber
         camera_info_sub_ = this->create_subscription<sensor_msgs::msg::CameraInfo>(
-            "/camera/camera/depth/camera_info", 10, std::bind(&ProjectionNode::camera_info_callback, this, _1));
+            "/camera/camera/aligned_depth_to_color/camera_info", 10, std::bind(&ProjectionNode::camera_info_callback, this, _1));
 
         // Sync handle
-        depth_img_sub_.subscribe(this, "/camera/camera/depth/image_rect_raw", rmw_qos_profile_system_default);
+        depth_img_sub_.subscribe(this, "/camera/camera/aligned_depth_to_color/image_raw", rmw_qos_profile_system_default);
         tracks_sub_.subscribe(this, "camera/track_2D_array", rmw_qos_profile_system_default);
 
         sync_ = std::make_shared<message_filters::Synchronizer<SyncPolicy>>(SyncPolicy(50), depth_img_sub_, tracks_sub_);
