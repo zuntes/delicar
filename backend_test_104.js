@@ -12,7 +12,7 @@ const io = new Server(server, {
 
 // Khởi tạo serial
 const port = new SerialPort({
-  path: 'COM5',
+  path: 'COM11',
   baudRate: 115200,
   autoOpen: false
 });
