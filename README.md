@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repository contains the code for running the Viettel Post's Delicar Robot in ROS2.
+This repository contains the code for running the Delicar Robot in ROS2.
 
 ## Dependencies
 The following dependencies are required to run the Delicar:
